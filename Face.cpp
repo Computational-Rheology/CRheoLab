@@ -44,7 +44,7 @@ void Face::computeFaceArea()
             double s = (a + b + c) / 2.0
 
             // face area
-            area_ = sqrt(s*(s-a)*(s-b)*(s-c));
+            area_ = sqrt(s * (s - a) * (s - b) * (s - c));
       }
       else
       {
@@ -55,7 +55,7 @@ void Face::computeFaceArea()
             {
                   centroid = centroid + facePoints_[i]->getPoint();
             }
-            centroid = centroid/nPointsInFace_;
+            centroid = centroid / nPointsInFace_;
 
             // face area
             area_ = 0.0;
@@ -64,7 +64,7 @@ void Face::computeFaceArea()
             for(int i = 0; i < nPointsInFace_; i++)
             {
                   // all points but the last
-                  if(i < nPointsInFace_-1)
+                  if(i < nPointsInFace_ - 1)
                   {
                         // edges length
                         double a = mag(facePoints_[i]->getPoint() - facePoints_[i+1]->getPoint());
@@ -83,7 +83,7 @@ void Face::computeFaceArea()
                   double s = (a + b + c) / 2.0
 
                   // face area
-                  area_ = area_ + sqrt(s*(s-a)*(s-b)*(s-c));
+                  area_ = area_ + sqrt(s * (s - a) * (s - b) * (s - c));
             }
 
       }
@@ -108,7 +108,7 @@ void Face::computeFaceCenterOfMass()
             {
                   centroid = centroid + facePoints_[i]->getPoint();
             }
-            centroid = centroid/nPointsInFace_;
+            centroid = centroid / nPointsInFace_;
 
             // numerator
             double numerator = 0.0;
@@ -147,7 +147,7 @@ void Face::computeFaceCenterOfMass()
                   double s = (a + b + c) / 2.0;
 
                   // subtriangle area
-                  double subarea = sqrt(s*(s-a)*(s-b)*(s-c));
+                  double subarea = sqrt(s * (s - a) * (s - b) * (s - c));
 
                   // compute numerator
                   numerator = numerator + subcentroid*subarea;
