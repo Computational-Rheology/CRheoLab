@@ -41,7 +41,7 @@ void Face::computeFaceArea()
             double c = mag(facePoints_[2]->getPoint() - facePoints_[0]->getPoint());
 
             // semi-perimeter
-            double s = (a + b + c)/2.0
+            double s = (a + b + c) / 2.0
 
             // face area
             area_ = sqrt(s*(s-a)*(s-b)*(s-c));
@@ -120,7 +120,7 @@ void Face::computeFaceCenterOfMass()
             for(int i = 0; i < nPointsInFace_; i++)
             {
                   // all points but the last
-                  if(i < nPointsInFace_-1)
+                  if(i < nPointsInFace_ - 1)
                   {
                         // edges length
                         double a = mag(facePoints_[i]->getPoint() - facePoints_[i+1]->getPoint());
