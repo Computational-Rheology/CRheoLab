@@ -16,10 +16,15 @@ class Cell
         // Setters
         void setCellFaces(const vector<Face*>& );
         void setCellID(const int& );
+        void setCenterOfMass(const vector3&);
+        //void setVolume(const double&);
 
         // Getters
         const vector3& getCenterOfMass() const;
+        const double&  getVolume() const;
 
+        void computeCenter();
+        void computeVolume();
          
     protected:
 

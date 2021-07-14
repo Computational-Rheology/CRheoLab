@@ -15,6 +15,7 @@
 #include "mathOperations.h"
 #include "Mesh.cpp"
 #include "findFiles.h"
+//#include "calCellCentersVols.cpp"
 
 
 template <typename T>
@@ -38,10 +39,19 @@ int main()
     
     Mesh polyMesh;
 
-    for (unsigned int i = 0; i< polyMesh.nFaces_ ; i++)
+    //for (unsigned int i = 0; i< polyMesh.nFaces_ ; i++)
+    //{
+      //  std::cout << polyMesh.faceList_[i].getWeightingFactor() << std::endl;;
+    //}
+    
+    std::cout << "\n\n Cell Volumes" <<"            "<<"Cell Centers\n "<< std::endl;
+    for (unsigned int i = 0; i< polyMesh.nCells_ ; i++)
     {
-        std::cout << polyMesh.faceList_[i].getWeightingFactor() << std::endl;;
+        polyMesh.cellList_[i].computeVolume();
+        polyMesh.cellList_[i].computeCenter();
+        std::cout << polyMesh.cellList_[i].getVolume() <<"          " << polyMesh.cellList_[i].getCenterOfMass() << std::endl;
     }
+
 
     /*// Print single point
     cout << polyMesh.pointList_[0] << endl;
@@ -53,7 +63,8 @@ int main()
 
 */
 
-    std::cout << "I am done" << std::endl;
+    std::cout << "I am done\n\n\n" << std::endl;
+
 
 
     //polyMesh.faceList_[0].owner()=2;
