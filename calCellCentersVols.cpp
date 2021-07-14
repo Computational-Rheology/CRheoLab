@@ -35,7 +35,6 @@ for (int i = 0; M.nCells_; i++ ){
     for (int j = 0; M.nFaces_; j++){
        if (own[i] == M.faceList_[j].getOwner() || nei[i] == M.faceList_[j].getNeighbour())
        {
-        facesPerCells[i]={};
         facesPerCells[i].push_back(&(M.faceList_[j]));
        }
     }
