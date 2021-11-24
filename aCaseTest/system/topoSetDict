@@ -1,0 +1,85 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.x                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+|*---------------------------------------------------------------------------*|
+|  File created by CFD support s.r.o., Wed Sep  2 09:05:06 2015               |
+|                    http://www.cdfsupport.com                                |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.3;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object     topoSetDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+actions
+(
+  {
+    name    polymerToeCap;
+    type    cellSet;
+    action  new;
+    source surfaceToCell;
+   sourceInfo
+   {
+       file            "toeCap.stl";
+       useSurfaceOrientation true;
+       outsidePoints   ((0 0 0));    // definition of outside
+       includeCut      false;              // cells cut by surface
+       includeInside   true;              // cells not on outside of surf
+       includeOutside  false;              // cells on outside of surf
+       nearDistance    0.1;                 // cells with centre near surf
+                                           // (set to -1 if not used)
+       curvature     -10;               // cells within nearDistance1
+                                            // and near surf curvature
+                                            // (set to -100 if not used)
+    }
+  }
+
+  {
+    name    polymerToeCap;
+    type    cellSet;
+    action  delete;
+    source surfaceToCell;
+   sourceInfo
+   {
+       file            "metalToeCap.stl";
+       useSurfaceOrientation true;
+       outsidePoints   ((0 0 0));    // definition of outside
+       includeCut      false;              // cells cut by surface
+       includeInside   true;              // cells not on outside of surf
+       includeOutside  false;              // cells on outside of surf
+       nearDistance    0;                 // cells with centre near surf
+                                           // (set to -1 if not used)
+       curvature       0;                // cells within nearDistance
+                                            // and near surf curvature
+                                            // (set to -100 if not used)
+    }
+  }
+
+  {
+    name    metalToeCap;
+    type    cellSet;
+    action  new;
+    source surfaceToCell;
+   sourceInfo
+   {
+       file            "metalToeCap.stl";
+       useSurfaceOrientation true;
+       outsidePoints   ((0 0 0));    // definition of outside
+       includeCut      false;              // cells cut by surface
+       includeInside   true;              // cells not on outside of surf
+       includeOutside  false;              // cells on outside of surf
+       nearDistance    0;                 // cells with centre near surf
+                                           // (set to -1 if not used)
+       curvature       0;                // cells within nearDistance
+                                            // and near surf curvature
+                                            // (set to -100 if not used)
+    }
+  }
+);
