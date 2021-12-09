@@ -180,7 +180,7 @@ By definiton the Face Skewness is a measure of the distance between the face cen
 
 This will give the Skewness Vector, \f$\vec{S}_{kw}\f$, (See Figure XX)
 
-\image html FaceIntPt.png "Figure XX: Face Intersection Point and Skewness Vector" width=550px
+\image html FaceIntPt.svg "Figure XX: Face Intersection Point and Skewness Vector" width=550px
 
 Then the actual Skewness, \f$S_{kw}\f$, value is obtained by a normalization, as:
 
@@ -193,7 +193,7 @@ where \f$M\f$ is the maximum magnitude of the following quantities:
 * **For boundary Faces**: \f$0.4 \| \vec{O}_{cm} \vec{F}_{i} \|\f$;
 * Projection of the vector that connects the Face center of mass, \f$ \vec{F_{cm}}\f$, with each of the Face Points, \f$\vec{P}_{i}\f$, on the direction of the Skewness Vector, \f$\vec{S}_{kw}\f$, for all the Face Points (see Figure YY). For more details, please refer to Face::computeSkewness()
 
-\image html PtProj.png "Figure YY: Projection of Vector that connects the Face center of mass with the Face Points on the Direction of the Skewness Vector" width=550px
+\image html PtProj.svg "Figure YY: Projection of Vector that connects the Face center of mass with the Face Points on the Direction of the Skewness Vector" width=550px
 
 Finnaly the Owner and Neighbour (for interior faces) cells skewness should be updated with the maximum of the value just calculated and the current cell value. This way, the cell skewness will be equal to the maximum skewness of the faces that comprise it. For more details, please refer to Cell::computeSkewness().
 
