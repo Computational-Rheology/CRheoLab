@@ -45,8 +45,6 @@ inline volField<T> operator-(const volField<T> & vf1, const volField<T> & vf2)
 
 
 //To compute the magnitude of a vectorField
-
-
 inline double magVector(const vectorField& v1) {
 
 for (unsigned int i=0; i < v1.size(); i++) {
@@ -59,7 +57,6 @@ for (unsigned int i=0; i < v1.size(); i++) {
    }
 
 // To compute a scalarField to store the magnitude of the vectorField
-
 template <typename vectorType>
 scalarField volField<vectorType>::magVector()
 {
