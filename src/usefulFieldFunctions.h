@@ -7,7 +7,7 @@ using namespace std;
 #include <math.h>
 #include <typeinfo>
 #include "volField.h"
-#include <string>
+#include <string.h>
 
 // sum two volFields
 template <typename T>
