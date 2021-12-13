@@ -8,7 +8,7 @@ This page is dedicated to the useful Functions for the volSacalarField
 
 ### General Information (Miguel)
 
-The useful functions created for the volField Class aim at providing a set of utilities to manipulate objects of the class and/or create new objects based on previously created objects of the class.
+The useful functions created for the volField Class aim at providing a set of utilities to manipulate objects of the class and/or create new objects based on previously created objects of the class.That will include for example calculating the maximum and minimum of a field, the shift and scale of a field, the projection of a vector, and the tensor invariants. 
 
 ----
 ### Max and Min from a Field (Miguel)
@@ -51,7 +51,7 @@ Scale the field with a constant scalar (same documentation as Shift)
 Project the vectors in one direction
 Create a scalarField with the magnitude of the vector
 
-The magnitude of the projection of the vector (V) in a general direction (P) as shown in Eq() is the dot product of this vector with the unit vector of the general direction. The unit vector of the general direction is the vector in the general direction divided by its norm. The projection in the general direction as shown in Eq().
+The magnitude of the projection of the vector (V) in a general direction (P) as shown in Eq() is the dot product of this vector with the unit vector of the general direction. The unit vector of the general direction is the vector in the general direction divided by its norm. The projection in the general direction is as shown in Eq().
 
 
 \begin{equation}
