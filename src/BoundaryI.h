@@ -61,9 +61,16 @@ const std::string& Boundary<vectorType>::name()
   return name_;
 }
 
+// Member function to access the boundary patch defined values
+template <typename vectorType>
+const int Boundary<vectorType>::numberOfFaces() const
+{
+  return definedValues_.size();
+}
+
 // Member function to access the boundary patch defined type ( fixedValue, fixedGradient, symmetry, and etc. )
 template <typename vectorType>
-std::string& Boundary<vectorType>::type()
+const std::string& Boundary<vectorType>::type() const
 {
   return type_;
 }

@@ -29,9 +29,30 @@ vector<Boundary<vectorType>>& BoundaryField<vectorType>::boundaryData()
 
 // Returns the size of the boundary patch
 template <typename vectorType>
-const int& BoundaryField<vectorType>::size() const
+const int& BoundaryField<vectorType>::nPatches() const
 {
-    return boundaryData_.size();
+    return nPatches_;
+}
+
+// Returns the size of the boundary patch
+template <typename vectorType>
+const int BoundaryField<vectorType>::patchINumberOfFaces(int i) const
+{
+    return boundaryData_[i].numberOfFaces();
+}
+
+// Returns the size of the boundary patch
+template <typename vectorType>
+const std::string& BoundaryField<vectorType>::patchITypeOfBCondition(int i) const
+{
+    return boundaryData_[i].type();
+}
+
+// Returns the size of the boundary patch
+template <typename vectorType>
+const std::string& BoundaryField<vectorType>::patchIName(int i) const
+{
+    return boundaryData_[i].name();
 }
 
 // Returns the name in the boundaryField patch list for the give patch index 

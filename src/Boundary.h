@@ -50,8 +50,11 @@ class Boundary
         ///@brief Member function to access the boundary patch defined name
         const std::string& name();
 
+        ///@brief Member function to access the boundary patch number of faces
+        const int numberOfFaces() const;
+
         ///@brief Member function to access the boundary patch defined type ( fixedValue, fixedGradient, symmetry, and etc. )
-        std::string& type();
+        const std::string& type() const;
     
         ///@brief Member function to access the boundary patch field type ( uniform and non-uniform )
         bool& uniformField();

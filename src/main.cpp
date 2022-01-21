@@ -2,6 +2,8 @@
 #include "Mesh.h"
 #include "IODictionary.h"
 #include "VolField.h"
+#include "fvFixedValuePatchField.h"
+
 
 //  void write_csv(std::string filename, std::string , std::vector<double> );
 
@@ -42,33 +44,35 @@ int main()
     //     }
     // }
     
-    // Testing constructor from the constructor initialization in the VolField class
-    VolField<scalarField> p ("p", polyMesh, time, MUST_READ);
-    // Testing constructor from the constructor initialization in the VolField class with default value
-    VolField<scalarField> pDefVal ("p", polyMesh, time, MUST_READ, 1348.84);
-    VolField<scalarField> pDefVal1 ("p", polyMesh, time, NO_READ );
+    // // Testing constructor from the constructor initialization in the VolField class
+    // VolField<scalarField> p ("p", polyMesh, time, MUST_READ);
+    // // Testing constructor from the constructor initialization in the VolField class with default value
+    // VolField<scalarField> pDefVal ("p", polyMesh, time, MUST_READ, 1348.84);
+    // VolField<scalarField> pDefVal1 ("p", polyMesh, time, NO_READ );
     // Testing constructor from the BoundaryField  class with Input file
     BoundaryField<scalarField> pBoundary("p", polyMesh, time, MUST_READ);
-    // Testing constructor from the BoundaryField  class with Default Value
-    BoundaryField<scalarField> pBoundaryNoRead("p", polyMesh, time, NO_READ, 15.0);
-    // Testing the c-like initialization for the BoundaryField object with the VolField Class boundary data access member function
-    BoundaryField<scalarField> pBAddress = p.boundaryField();
-    
-    // VolField<scalarField> p ("p", polyMesh, time, FILE_READ);
-    // std::vector< Boundary<scalarField> >& pBoundary = p.boundaryField();
-    // Testing constructor from the constructor initialization in the VolField class
-    VolField<vectorField> U ("U", polyMesh, time, MUST_READ);
-    // Testing constructor from the constructor initialization in the VolField class with default value
-    VolField<vectorField> UDefVal ("U", polyMesh, time, NO_READ,  vector3{1,2,3} );
-    VolField<vectorField> UDefVal1 ("U", polyMesh, time, NO_READ );
-    // Testing constructor from the BoundaryField  class with Input file
-    BoundaryField<vectorField> UBoundary ("U", polyMesh, time, MUST_READ);
-    // Testing constructor from the BoundaryField  class with Default Value
-    BoundaryField<vectorField> UBoundaryNoRead ("U", polyMesh, time, NO_READ, vector3{2,1,3} );
-    // Testing the c-like initialization for the BoundaryField object with the VolField Class boundary data access member function
-    BoundaryField<vectorField> UBAddress = U.boundaryField();    
+    fvFixedValuePatchField<scalarField> pBoundaryCondition(pBoundary);
 
-    // VolField<tensorField> tau ("tau", polyMesh, time);
+    // // Testing constructor from the BoundaryField  class with Default Value
+    // BoundaryField<scalarField> pBoundaryNoRead("p", polyMesh, time, NO_READ, 15.0);
+    // // Testing the c-like initialization for the BoundaryField object with the VolField Class boundary data access member function
+    // BoundaryField<scalarField> pBAddress = p.boundaryField();
+    
+    // // VolField<scalarField> p ("p", polyMesh, time, FILE_READ);
+    // // std::vector< Boundary<scalarField> >& pBoundary = p.boundaryField();
+    // // Testing constructor from the constructor initialization in the VolField class
+    // VolField<vectorField> U ("U", polyMesh, time, MUST_READ);
+    // // Testing constructor from the constructor initialization in the VolField class with default value
+    // VolField<vectorField> UDefVal ("U", polyMesh, time, NO_READ,  vector3{1,2,3} );
+    // VolField<vectorField> UDefVal1 ("U", polyMesh, time, NO_READ );
+    // // Testing constructor from the BoundaryField  class with Input file
+    // BoundaryField<vectorField> UBoundary ("U", polyMesh, time, MUST_READ);
+    // // Testing constructor from the BoundaryField  class with Default Value
+    // BoundaryField<vectorField> UBoundaryNoRead ("U", polyMesh, time, NO_READ, vector3{2,1,3} );
+    // // Testing the c-like initialization for the BoundaryField object with the VolField Class boundary data access member function
+    // BoundaryField<vectorField> UBAddress = U.boundaryField();    
+
+    // // VolField<tensorField> tau ("tau", polyMesh, time);
 
     
     // std::cout << pBoundary[0].patchName() << std::endl;
