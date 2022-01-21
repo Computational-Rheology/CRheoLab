@@ -2,7 +2,7 @@
 #include "Mesh.h"
 #include "IODictionary.h"
 #include "VolField.h"
-#include "fvFixedValuePatchField.h"
+#include "fvBoundaryConditionsField.h"
 
 
 //  void write_csv(std::string filename, std::string , std::vector<double> );
@@ -51,7 +51,7 @@ int main()
     // VolField<scalarField> pDefVal1 ("p", polyMesh, time, NO_READ );
     // Testing constructor from the BoundaryField  class with Input file
     BoundaryField<scalarField> pBoundary("p", polyMesh, time, MUST_READ);
-    fvFixedValuePatchField<scalarField> pBoundaryCondition(pBoundary);
+    fvBoundaryConditionsField<scalarField> pBoundaryCondition(pBoundary);
 
     // // Testing constructor from the BoundaryField  class with Default Value
     // BoundaryField<scalarField> pBoundaryNoRead("p", polyMesh, time, NO_READ, 15.0);
