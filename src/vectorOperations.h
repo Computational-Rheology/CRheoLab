@@ -4,36 +4,51 @@
 // Output vectorField to screen
 inline std::ostream& operator<<(std::ostream& os, const vectorField& v)
 {
-    os << "[" << std::endl;
+    os << "(" << std::endl;
     
     for (unsigned int i = 0; i < v.size(); ++i) {
         
         os << "\t";
 
-        os << "[ ";
+        os << "(";
 
         for (unsigned int j=0; j< v[i].size(); j++)
         {
-            os<< v[i][j] << " ";
+            if(j<v[i].size()-1)
+            {
+                os<< v[i][j] << " ";
+            }
+            else
+            {
+                os<< v[i][j];
+            }
+
         }
-        os << "]" << std::endl;
+        os << ")" << std::endl;
     }
 
-    os << "]\n";
+    os << ")";
     return os;
 }
 
 // Output vectorField to screen
 inline std::ostream& operator<<(std::ostream& os, const vector3& v)
 {
-    os << "[ " ;
+    os << "(" ;
 
-    for (unsigned int i = 0; i < v.size(); ++i) {
-
-        os<< v[i] << " ";
+    for (unsigned int i = 0; i < v.size(); ++i){
+        
+        if(i<v.size()-1)
+        {
+            os<< v[i] << " ";
+        }
+        else
+        {        
+            os<< v[i];
+        }
     }
 
-    os << "]" ;
+    os << ")" ;
     return os;
 }
 

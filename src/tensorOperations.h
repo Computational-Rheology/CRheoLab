@@ -4,38 +4,103 @@
 // Output vectorField to screen
 inline std::ostream& operator<<(std::ostream& os, const tensorField& t)
 {
-    os << "[" << std::endl;
+    os << "(" << std::endl;
     
     for (unsigned int i = 0; i < t.size(); ++i) {
         
         os << "\t";
 
-        os << "[ ";
+        os << "(";
 
         for (unsigned int j=0; j< t[i].size(); j++)
-        {
-            os<< t[i][j] << " ";
+        {   
+            if(j<t[i].size()-1)
+            {
+                os<< t[i][j] << " ";
+            }
+            else
+            {
+                os<< t[i][j];
+            }
+            
         }
-        os << "]" << std::endl;
+        os << ")" << std::endl;
     }
 
-    os << "]\n";
+    os << ")";
     return os;
 }
+
+inline std::ostream& operator<<(std::ostream& os, const symmTensorField& t)
+{
+    os << "(" << std::endl;
+    
+    for (unsigned int i = 0; i < t.size(); ++i) {
+        
+        os << "\t";
+
+        os << "(";
+
+        for (unsigned int j=0; j< t[i].size(); j++)
+        {   
+            if(j<t[i].size()-1)
+            {
+                os<< t[i][j] << " ";
+            }
+            else
+            {
+                os<< t[i][j];
+            }
+            
+        }
+        os << ")" << std::endl;
+    }
+
+    os << ")";
+    return os;
+}
+
 
 inline std::ostream& operator<<(std::ostream& os, const tensor& t)
 {
-    os << "[ " ;
+    os << "(" ;
     
     for (unsigned int i = 0; i < t.size(); ++i)
-    {
-
-        os<< t[i] << " ";
+    {   
+        if(i<t.size()-1)
+            {
+                os<< t[i]<< " ";
+            }
+            else
+            {
+                os<< t[i];
+            }
     }
 
-    os << " ]\n";
+    os << ")";
     return os;
 }
+
+inline std::ostream& operator<<(std::ostream& os, const symmTensor& t)
+{
+    os << "(" ;
+    
+    for (unsigned int i = 0; i < t.size(); ++i)
+    {   
+        if(i<t.size()-1)
+            {
+                os<< t[i]<< " ";
+            }
+            else
+            {
+                os<< t[i];
+            }
+    }
+
+    os << ")";
+    return os;
+}
+
 
 
 // Math Operations
