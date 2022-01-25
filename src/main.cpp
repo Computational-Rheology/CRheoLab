@@ -44,14 +44,15 @@ int main()
     //     }
     // }
     
-    // // Testing constructor from the constructor initialization in the VolField class
-    // VolField<scalarField> p ("p", polyMesh, time, MUST_READ);
-    // // Testing constructor from the constructor initialization in the VolField class with default value
-    // VolField<scalarField> pDefVal ("p", polyMesh, time, MUST_READ, 1348.84);
-    // VolField<scalarField> pDefVal1 ("p", polyMesh, time, NO_READ );
+    // Testing constructor from the constructor initialization in the VolField class
+    VolField<scalarField> p ("p", polyMesh, time, MUST_READ);
+    // Testing constructor from the constructor initialization in the VolField class with default value
+    VolField<scalarField> pDefVal ("p", polyMesh, time, MUST_READ, 1348.84);
+    VolField<scalarField> pDefVal1 ("p", polyMesh, time, NO_READ );
     // Testing constructor from the BoundaryField  class with Input file
     BoundaryField<scalarField> pBoundary("p", polyMesh, time, MUST_READ);
-    fvBoundaryConditionsField<scalarField> pBoundaryCondition(pBoundary);
+    // fvBoundaryConditionsField<scalarField> pBoundaryCondition(pBoundary);
+    fvBoundaryConditionsField<scalarField> pBoundaryCondition(p);
 
     // // Testing constructor from the BoundaryField  class with Default Value
     // BoundaryField<scalarField> pBoundaryNoRead("p", polyMesh, time, NO_READ, 15.0);

@@ -15,9 +15,8 @@ class fvBoundaryConditionsField
 {
     public:
     
-        // Constructor
-        // constructing a 
-        fvBoundaryConditionsField(BoundaryField<vectorType> boundaryPatches);
+        // Constructor constructing a 
+        fvBoundaryConditionsField(VolField<vectorType> field);
 
         struct coefficients
         {

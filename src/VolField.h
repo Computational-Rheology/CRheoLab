@@ -40,6 +40,12 @@ class VolField
         // Give access to the boundary entities
         BoundaryField<vectorType>& boundaryField();
 
+        // Give access to the field/file path in the OS directory tree
+        const std::string& fieldFilePath();
+
+        // Give access to the field/file name
+        const std::string& fieldFileName();
+
     private:
         const Mesh& mesh_;
         const RunTime& runTime_;

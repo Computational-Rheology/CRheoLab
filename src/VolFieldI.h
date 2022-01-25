@@ -40,3 +40,18 @@ BoundaryField<vectorType>& VolField<vectorType>::boundaryField()
 {
   return boundaryField_;
 }
+
+// Give access to the boundary entities
+template <typename vectorType>
+const std::string& VolField<vectorType>::fieldFilePath()
+{
+  return this->Path();
+}
+
+// Give access to the boundary entities
+template <typename vectorType>
+const std::string& VolField<vectorType>::fieldFileName()
+{
+  return this->Name();
+}
+
