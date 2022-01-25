@@ -29,72 +29,22 @@ int main()
     checkCaseStructure();
     
     RunTime time;
+    std::cout << "Current path from time object is : " << time.Path() << std::endl;
 
     Mesh polyMesh;
     
-    // Testing constructor from the constructor initialization in the VolField class
-    VolField<scalarField> p ("p", polyMesh, time, MUST_READ);
-    // Testing constructor from the constructor initialization in the VolField class with default value
-    VolField<scalarField> pDefVal ("p", polyMesh, time, MUST_READ, 1348.84);
-    VolField<scalarField> pDefVal1 ("p", polyMesh, time, NO_READ );
-    // Testing constructor from the BoundaryField  class with Input file
-    BoundaryField<scalarField> pBoundary("p", polyMesh, time, MUST_READ);
-    // fvBoundaryConditionsField<scalarField> pBoundaryCondition(pBoundary);
-    fvBoundaryConditionsField<scalarField> pBoundaryCondition(p);
-
-    // // Testing constructor from the BoundaryField  class with Default Value
-    // BoundaryField<scalarField> pBoundaryNoRead("p", polyMesh, time, NO_READ, 15.0);
-    // // Testing the c-like initialization for the BoundaryField object with the VolField Class boundary data access member function
-    // BoundaryField<scalarField> pBAddress = p.boundaryField();
-    
-    // // VolField<scalarField> p ("p", polyMesh, time, FILE_READ);
-    // // std::vector< Boundary<scalarField> >& pBoundary = p.boundaryField();
-    // // Testing constructor from the constructor initialization in the VolField class
-    // VolField<vectorField> U ("U", polyMesh, time, MUST_READ);
-    // // Testing constructor from the constructor initialization in the VolField class with default value
-    // VolField<vectorField> UDefVal ("U", polyMesh, time, NO_READ,  vector3{1,2,3} );
-    // VolField<vectorField> UDefVal1 ("U", polyMesh, time, NO_READ );
-    // // Testing constructor from the BoundaryField  class with Input file
-    // BoundaryField<vectorField> UBoundary ("U", polyMesh, time, MUST_READ);
-    // // Testing constructor from the BoundaryField  class with Default Value
-    // BoundaryField<vectorField> UBoundaryNoRead ("U", polyMesh, time, NO_READ, vector3{2,1,3} );
-    // // Testing the c-like initialization for the BoundaryField object with the VolField Class boundary data access member function
-    // BoundaryField<vectorField> UBAddress = U.boundaryField();    
-
-    // // VolField<tensorField> tau ("tau", polyMesh, time);
-
-    
-    // std::cout << pBoundary[0].patchName() << std::endl;
-    // std::cout << pBoundary[1].patchName() << std::endl;
-    // std::cout << pBoundary[2].patchName() << std::endl;
-
-    // std::cout<<"Patch ID: "<<p.patchID("banana")<<std::endl;
-    // std::cout<<"Patch ID: "<<p.patchID("top")<<std::endl;
-    // std::cout<<"Patch ID: "<<p.patchID("bottom")<<std::endl;
-    // std::cout<<"Patch Name: "<<pBoundary[p.patchID("top")].patchName()<<std::endl;
-    // std::cout<<"Patch Name: "<<pBoundary[p.patchID("banana")].patchName()<<std::endl;
-    // std::cout<<"Patch ID: "<<p.patchID(pBoundary[p.patchID("banana")].patchName())<<std::endl;
-
-
-    // for (int i=0; i< 20; i++)
-
-    // {
-    // scalarField& valueOfField  = pBoundary[i].boundary();
-    // scalarField& valueOfField  = pBoundary[i][j];
-    // }
-
-   // VolField<vectorField> U ("U", polyMesh);
-
-   // boundaryField<scalarField> tst ("p", polyMesh, time);
-
-    // // TODO main > VolField>boundaryfield> boundary> patch
-    // VolField<scalarField> pBC ("p", polyMesh, time, FILE_READ);
-
-
     // ----------------------------------------------------------------------- |
-    // Testing Boundary Field class implementation
+    // Testing Boundary Field and Condition classes implementations
 
-        std::cout << "Current path is : " << time.Path() << std::endl;
+        // Testing constructor from the constructor initialization in the VolField class
+        VolField<scalarField> p ("p", polyMesh, time, MUST_READ);
+        // Testing constructor from the constructor initialization in the VolField class with default value
+        VolField<scalarField> pDefVal ("p", polyMesh, time, MUST_READ, 1348.84);
+        VolField<scalarField> pDefVal1 ("p", polyMesh, time, NO_READ );
+        // Testing constructor from the BoundaryField  class with Input file
+        BoundaryField<scalarField> pBoundary("p", polyMesh, time, MUST_READ);
+        // fvBoundaryConditionsField<scalarField> pBoundaryCondition(pBoundary);
+        fvBoundaryConditionsField<scalarField> pBoundaryCondition(p);
 
         // for (int i = 0; i < polyMesh.patchList_.size(); i++)
         // {
@@ -110,20 +60,6 @@ int main()
         // }
         
         // Testing constructor from the constructor initialization in the VolField class
-        VolField<scalarField> p ("p", polyMesh, time, MUST_READ);
-        // Testing constructor from the constructor initialization in the VolField class with default value
-        VolField<scalarField> pDefVal ("p", polyMesh, time, MUST_READ, 1348.84);
-        VolField<scalarField> pDefVal1 ("p", polyMesh, time, NO_READ );
-        // Testing constructor from the BoundaryField  class with Input file
-        BoundaryField<scalarField> pBoundary("p", polyMesh, time, MUST_READ);
-        // Testing constructor from the BoundaryField  class with Default Value
-        BoundaryField<scalarField> pBoundaryNoRead("p", polyMesh, time, NO_READ, 15.0);
-        // Testing the c-like initialization for the BoundaryField object with the VolField Class boundary data access member function
-        BoundaryField<scalarField> pBAddress = p.boundaryField();
-        
-        // VolField<scalarField> p ("p", polyMesh, time, FILE_READ);
-        // std::vector< Boundary<scalarField> >& pBoundary = p.boundaryField();
-        // Testing constructor from the constructor initialization in the VolField class
         VolField<vectorField> U ("U", polyMesh, time, MUST_READ);
         // Testing constructor from the constructor initialization in the VolField class with default value
         VolField<vectorField> UDefVal ("U", polyMesh, time, NO_READ,  vector3{1,2,3} );
@@ -137,7 +73,6 @@ int main()
 
         // VolField<tensorField> tau ("tau", polyMesh, time);
 
-        
         // std::cout << pBoundary[0].patchName() << std::endl;
         // std::cout << pBoundary[1].patchName() << std::endl;
         // std::cout << pBoundary[2].patchName() << std::endl;
@@ -155,30 +90,29 @@ int main()
     // ----------------------------------------------------------------------- |
     // Testing IODictionaryw.h implementation
 
-        symmTensorField symmfield =  {{5e+06, -0.000144797, -0.000460091, 0.0545079, -0.00401398, 0.102309},{5e+06, -0.000115814 ,-0.000726005, 0.00996289 ,0.0168723, 0.0300389},{5e+06, -0.000115814 ,-0.000726005, 0.00996289 ,0.0168723, 0.0300389}  } ;
-        patchBoundaryConditions<symmTensorField> pBCRIght = { "calculated", symmfield , {} };
-        patchBoundaryConditions<symmTensorField> pBCLeft = { "empty", {} , {} };
-        patchBoundaryConditions<symmTensorField> pBCTop = { "empty", symmfield , {} };
+        // symmTensorField symmfield =  {{5e+06, -0.000144797, -0.000460091, 0.0545079, -0.00401398, 0.102309},{5e+06, -0.000115814 ,-0.000726005, 0.00996289 ,0.0168723, 0.0300389},{5e+06, -0.000115814 ,-0.000726005, 0.00996289 ,0.0168723, 0.0300389}  } ;
+        // patchBoundaryConditions<symmTensorField> pBCRIght = { "calculated", symmfield , {} };
+        // patchBoundaryConditions<symmTensorField> pBCLeft = { "empty", {} , {} };
+        // patchBoundaryConditions<symmTensorField> pBCTop = { "empty", symmfield , {} };
 
-        std::cout<<"\n\n"<<std::endl;
-        //std::cout << '\n'<< pBCRight << std::endl;
-        boundaryField<symmTensorField> bField = {{"Right","Left","Top"},{pBCRIght,pBCLeft,pBCTop}};
+        // std::cout<<"\n\n"<<std::endl;
+        // //std::cout << '\n'<< pBCRight << std::endl;
+        // boundaryField<symmTensorField> bField = {{"Right","Left","Top"},{pBCRIght,pBCLeft,pBCTop}};
         
-        internalField<symmTensorField> iField =  {symmfield.size(),symmfield};
-        // VolField<vectorField> U ("U", polyMesh);
+        // internalField<symmTensorField> iField =  {symmfield.size(),symmfield};
+        // // VolField<vectorField> U ("U", polyMesh);
 
-        std::cout<<iField<<std::endl;
+        // std::cout<<iField<<std::endl;
 
-        std::cout<< bField << std::endl;
+        // std::cout<< bField << std::endl;
 
-        std::cout<<"OK"<<std::endl;
+        // std::cout<<"OK"<<std::endl;
 
     // --- End - of --- Testing IODictionaryw.h implementation
     // ----------------------------------------------------------------------- |
 
-
     return 0;
-    
+
 }
 
 
