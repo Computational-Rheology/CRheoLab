@@ -16,28 +16,31 @@ class fvBoundaryConditionsField
     public:
     
         // Constructor constructing a 
-        fvBoundaryConditionsField(VolField<vectorType> field);
+        fvBoundaryConditionsField(VolField<vectorType> field, const Mesh& mesh);
 
         struct coefficients
         {
-          // The values for the ...
-          vectorType valueInternalCoeffs_;
+          // Check if the patch has been updated.
+          bool updated;
+
+          // Todo check when it will be needed
+          // // The values for the ...
+          // vectorType valueInternalCoeffs;
           
-          // The values for the ...
-          vectorType valueBoundaryCoeffs_;
+          // // The values for the ...
+          // vectorType valueBoundaryCoeffs;
 
           // The values for the ...
-          vectorType gradientInternalCoeffs_;
+          vectorType gradientInternalCoeffs;
 
           // The values for the ...
-          vectorType gradientBoundaryCoeffs_;
+          vectorType gradientBoundaryCoeffs;
         };
 
         // Destructor
         virtual ~fvBoundaryConditionsField(){} ;
 
         void updateCoeffs();
-
 
     private:
 
@@ -46,9 +49,6 @@ class fvBoundaryConditionsField
         // // The naming given to the patch
         // const std::string& name_;
         vector<coefficients> coefficients_;
-
-        // Check if the patch has been updated.
-        bool updated_;
 
 };
 

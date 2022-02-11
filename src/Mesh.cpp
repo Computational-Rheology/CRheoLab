@@ -327,6 +327,12 @@ void Mesh::updateCellAndFaceData(std::string pathOwners, std::string pathNeighbo
       cellList_[cellI].computeVolume();
       cellList_[cellI].computeCenter();
   }
+  // Update Cells centroids distances, and  cell to face centroids for Boundary faces
+  for (unsigned int faceI = 0; faceI < nFaces_; faceI++)
+  {
+      faceList_[faceI].computeCentoidsDistance();
+  }
+
 
   // Update face weighting factors
   for (unsigned int faceI = 0; faceI < nFaces_; faceI++)
@@ -341,7 +347,6 @@ void Mesh::updateCellAndFaceData(std::string pathOwners, std::string pathNeighbo
     cellList_[cellI].computeMaxNonOrthogonality();    
     cellList_[cellI].computeSkewness(); 
   }
-
 }
 
 

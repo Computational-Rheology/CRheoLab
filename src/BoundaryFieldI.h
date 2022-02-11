@@ -20,13 +20,6 @@ BoundaryField<vectorType>::BoundaryField(std::string fileName, const Mesh& mesh,
     }
 }
 
-// Member function to access the boundary data
-template <typename vectorType>
-vector<Boundary<vectorType>>& BoundaryField<vectorType>::boundaryData()
-{
-    return boundaryData_;
-}
-
 // Returns the size of the boundary patch
 template <typename vectorType>
 const int& BoundaryField<vectorType>::nPatches() const
@@ -50,9 +43,23 @@ const std::string& BoundaryField<vectorType>::patchITypeOfBCondition(int i) cons
 
 // Returns the size of the boundary patch
 template <typename vectorType>
-const std::string& BoundaryField<vectorType>::patchIName(int i) const
+const std::string& BoundaryField<vectorType>::patchIName(int i) 
 {
     return boundaryData_[i].name();
+}
+
+// Returns for a patch I, the face J defined value
+template <typename vectorType>
+typename vectorType::value_type BoundaryField<vectorType>::patchIFaceJValue(int patchI, int faceJ)
+{
+    return boundaryData_[patchI].definedValues(faceJ);
+}
+
+// Member function to access the boundary data
+template <typename vectorType>
+vector<Boundary<vectorType>>& BoundaryField<vectorType>::boundaryData()
+{
+    return boundaryData_;
 }
 
 // Returns the name in the boundaryField patch list for the give patch index 
@@ -68,12 +75,5 @@ const int& BoundaryField<vectorType>::patchID(const std::string& patchName) cons
         } 
     }
     return pId;
-}
-
-// Returns the index in the boundaryField patch list for the give patch name 
-template <typename vectorType>
-const std::string& BoundaryField<vectorType>::patchName(const int& ID) const
-{
-    return boundaryData_[ID].name();
 }
 

@@ -36,6 +36,7 @@ class Face
         const double& getNonOrthogonality() const; 
         const double& getSkewness() const;
         const vector3& getIntersectionPoint() const;
+        const vector3& getCentoidsDist() const;
 
         // Computations
         void computeArea();
@@ -54,6 +55,8 @@ class Face
         void computeIntersectionPoint();
         
         void computeSkewness();
+
+        void computeCentoidsDistance();
 
         // Write to stream
         friend std::ostream& operator<<(std::ostream& , const Face& );
@@ -87,6 +90,9 @@ class Face
 
         // Intersection point (IP)
         vector3 intersectionPoint_; 
+
+        // Distance between cell centers (interior faces) / or boundary face centroid to cell centrois (boundary face)
+        vector3 centoidsDist_; 
 };
 
 #endif // FACE_H

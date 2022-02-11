@@ -23,7 +23,7 @@ using namespace std;
 
 int main()
 {
-      
+
     std::cout << "Current path is : " << getExecutablePath() << std::endl;
 
     checkCaseStructure();
@@ -44,7 +44,7 @@ int main()
         // Testing constructor from the BoundaryField  class with Input file
         BoundaryField<scalarField> pBoundary("p", polyMesh, time, MUST_READ);
         // fvBoundaryConditionsField<scalarField> pBoundaryCondition(pBoundary);
-        fvBoundaryConditionsField<scalarField> pBoundaryCondition(p);
+        fvBoundaryConditionsField<scalarField> pBoundaryCondition(p, polyMesh);
 
         // for (int i = 0; i < polyMesh.patchList_.size(); i++)
         // {

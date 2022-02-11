@@ -41,16 +41,16 @@ class BoundaryField
         const std::string& patchITypeOfBCondition(int i) const;
 
         ///@brief Returns the size of the boundary patch
-        const std::string& patchIName(int i) const;
+        const std::string& patchIName(int i);
+
+        ///@brief Returns for a patch I, the face J defined value
+        typename vectorType::value_type patchIFaceJValue(int patchI, int faceJ);
 
         ///@brief Member function to access the boundary data
         vector<Boundary<vectorType>>& boundaryData();
 
         ///@brief Returns the index in the boundaryField patch list for the give patch name 
         const int& patchID(const std::string& patchName) const;
-
-        ///@brief Returns the name in the boundaryField patch list for the give patch index 
-        const std::string& patchName(const int& ID) const;
 
     private:
 

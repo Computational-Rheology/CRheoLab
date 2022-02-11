@@ -49,9 +49,9 @@ Boundary<vectorType>::Boundary(std::string fileName, const Patch& patch, const R
 
 // Member function to access the boundary patch defined values
 template <typename vectorType>
-vectorType& Boundary<vectorType>::definedValues()
+typename vectorType::value_type& Boundary<vectorType>::definedValues(int& faceI)
 {
-  return definedValues_;
+  return definedValues_[faceI];
 }
 
 // Member function to access the boundary patch defined name
