@@ -29,6 +29,7 @@ fvBoundaryConditionsField<vectorType>::fvBoundaryConditionsField(VolField<vector
     {
       for (int faceI = 0; faceI < sizeOfPatch; faceI++)
       {
+        // valueInternalCoeffs are for gradient calculations.
         // The inverse distance between the face Center and cell Center [ delta =  1 / || d || ]
         double delta( 1.0 / mag( mesh.faceList_[startPatchFaceID+faceI].getCentoidsDist()) );
         // Load the field value defined by the User for this patch and face. 
