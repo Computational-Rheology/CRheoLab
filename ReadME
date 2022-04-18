@@ -3,10 +3,12 @@ sudo apt-get install libboost-all-dev
 
 
 # Clean Compilation
-make clean
+# make clean
 
-# Compile
-make 
+# # Compile
+# make 
+
+./run.sh
 
 # Add executable to PATH for running anywhere
 

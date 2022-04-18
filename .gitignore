@@ -4,3 +4,4 @@ doc/bib*
 doc/citelist*
 bin/*
 .DS_Store
+build/*
