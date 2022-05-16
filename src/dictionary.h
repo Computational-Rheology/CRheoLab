@@ -9,7 +9,7 @@
 #include <sstream> 
 #include <algorithm>
 #include <regex>
-#include "IOobject.h"
+#include "IOObject.h"
 
 
 class dictionary

@@ -173,7 +173,7 @@ inline tensor operator/(const tensor& t1, const double& d1)
    return result;
 }
 
-inline tensor  operator/(const double& d1, const tensor& t1)
+inline tensor operator/(const double& d1, const tensor& t1)
 {
     tensor result;
 

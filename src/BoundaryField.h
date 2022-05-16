@@ -18,7 +18,7 @@ class BoundaryField
         ///@param mesh reference to the Mesh
         ///@param time reference to a RunTime object 
         ///@param action Enum fileAction ( MUST_READ or NO_READ)
-        BoundaryField(std::string fileName, const Mesh& mesh, const RunTime& time, fileAction action);
+        BoundaryField(const IOObject&);
 
         ///@brief BoundaryField constructor by setting a default value for the field for all the boundary patches  
         ///@param fileName name of the file to read field data from
@@ -26,7 +26,8 @@ class BoundaryField
         ///@param time reference to a RunTime object 
         ///@param action Enum fileAction ( MUST_READ or NO_READ)
         ///@param defaultValue is a scalar, vector or a tensor with which the field must be initialized. \note Vectors and tensors must be initialized in braces like: {value1,value2, ...,etc. }.
-        BoundaryField(std::string fileName, const Mesh& mesh, const RunTime& time, fileAction action, const typename vectorType::value_type& defaultValue);
+        BoundaryField(const IOObject&, const typename vectorType::value_type& defaultValue);
+            
 
         // Destructor
         virtual ~BoundaryField(){} ;

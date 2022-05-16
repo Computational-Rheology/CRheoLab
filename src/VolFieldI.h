@@ -1,21 +1,20 @@
 #include "readVolField.h"
 
 template <typename vectorType>
-VolField<vectorType>::VolField(std::string fileName, const Mesh &mesh, const RunTime &time, fileAction action)
-    : IODictionary(time.Path(), fileName),
-      mesh_(mesh),
-      runTime_(time),
-      boundaryField_(fileName, mesh, time, action),
-      action_(action)
+VolField<vectorType>::VolField(const IOObject& IO)
+    : IODictionary(IO),
+      mesh_(IO.mesh()),
+      runTime_(IO.mesh().time()),
+      boundaryField_(IO)
 {
   // Check action
-  if (action  == MUST_READ)
+  if (read_  == MUST_READ)
   {
       internalField_=readInternalField();
   }
-  else if (action == NO_READ)
+  else if (read_ == NO_READ)
   {
-      internalField_.resize(mesh.nCells_);
+      internalField_.resize(this->mesh().nCells_);
   }
   else
   {
@@ -24,14 +23,13 @@ VolField<vectorType>::VolField(std::string fileName, const Mesh &mesh, const Run
 }
 
 template <typename vectorType>
-VolField<vectorType>::VolField(std::string fileName, const Mesh &mesh, const RunTime &time, fileAction action, const typename vectorType::value_type& defaultValue)
-    : IODictionary(time.Path(), fileName),
+VolField<vectorType>::VolField(const IOObject& IO, const typename vectorType::value_type& defaultValue)
+    : IODictionary(IO),
       mesh_(mesh),
       runTime_(time),
-      boundaryField_(fileName, mesh, time, action, defaultValue),
-      action_(action)
+      boundaryField_(this.name(), this.mesh(), this.mesh().time(), defaultValue)
 {
-      internalField_.resize(mesh.nCells_, defaultValue);
+      internalField_.resize(this.mesh().nCells_, defaultValue);
 }
 
 // Give access to the boundary entities

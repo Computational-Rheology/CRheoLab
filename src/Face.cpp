@@ -19,7 +19,7 @@ Face::Face()
 {}
 
 // Setters
-void Face::setOwner ( const Cell& owner)
+void Face::setOwner (const Cell& owner)
 {
     owner_ = &owner;
 }

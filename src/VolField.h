@@ -22,10 +22,10 @@ class VolField
     public:
 
         // Default constructor
-        VolField(std::string fileName, const Mesh& mesh, const RunTime& time, fileAction action);
+        VolField(const IOObject& IO);
 
         // Constructor with a default value passed by argument
-        VolField(std::string fileName, const Mesh& mesh, const RunTime& time, fileAction action, const typename vectorType::value_type& defaultValue);
+        VolField(const IOObject& IO, const typename vectorType::value_type& defaultValue);
 
         // Destructor
         virtual ~VolField(){} ;
@@ -45,7 +45,7 @@ class VolField
         const RunTime& runTime_;
         vectorType internalField_;
         BoundaryField<vectorType> boundaryField_;
-        fileAction action_;
+        
 
 };
 

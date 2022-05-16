@@ -48,7 +48,7 @@ void Boundary<vectorType>::readBoundaryPatch(const std::string& patchName)
     this->uniformField_=true;
   
     // File location path
-    std::string fileLocation = this->Path() + this->Name();
+    std::string fileLocation = this->path();
 
     // Passes the file location path into a ifsteam
     std::ifstream in_file(fileLocation.c_str());

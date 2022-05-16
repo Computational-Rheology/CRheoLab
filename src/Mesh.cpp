@@ -1,13 +1,15 @@
 #include "Mesh.h"
 
 
-Mesh::Mesh()
-: nPoints_(0),
+Mesh::Mesh(const RunTime& time)
+: 
+  nPoints_(0),
   nFaces_(0),
   nInteriorFaces_(0),
   nBoundaryFaces_(0),
   nCells_(0),
-  nPatches_(0)
+  nPatches_(0),
+  time_(time)
 { 
   readMesh();
 }
@@ -34,6 +36,12 @@ void Mesh::readMesh()
     std::cout << "Mesh was read successfully!" << std::endl;
 }
 
+std::vector <IOObject*> dataBase_()
+
+{
+
+
+};
 
 unsigned int Mesh::getNEntitites(std::ifstream& file)
 {

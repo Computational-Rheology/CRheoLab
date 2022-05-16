@@ -8,25 +8,18 @@
 #include <iostream>
 #include <sstream> 
 #include <algorithm>
-
-
-enum fileAction {
-     //Read signature
-      MUST_READ=1,
-      NO_READ=2
-};
-
+#include "IOObject.h"
 
 class IODictionary
+:
+public IOObject
 {
     public:
         // Constructor
-        IODictionary(std::string path, std::string fileName);
+        IODictionary(const IOObject& IO);
         
         // Destructor
         virtual ~IODictionary(){} ;
-
-        bool setPath (std::string& newPath);
         
     protected:
 	
@@ -160,10 +153,7 @@ class IODictionary
 
         const std::string& Path() const;
         const std::string& Name() const;
-
-    private:
-        std::string path_;
-        std::string fileName_;
+       
 };
 
 
