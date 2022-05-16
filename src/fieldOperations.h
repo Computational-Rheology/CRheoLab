@@ -1,6 +1,7 @@
 #ifndef FIELDOPERATIONS_H
 #define FIELDOPERATIONS_H
 
+
 // Check if both vectors have the same size
 template <typename T1>
 inline void checkSize(const std::vector<T1>& v1, const std::vector<T1>& v2)

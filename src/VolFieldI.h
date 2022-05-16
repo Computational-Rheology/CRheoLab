@@ -1,21 +1,18 @@
 #include "readVolField.h"
 
 template <typename vectorType>
-VolField<vectorType>::VolField(std::string fileName, const Mesh &mesh, const RunTime &time, fileAction action)
-    : IODictionary(time.Path(), fileName),
-      mesh_(mesh),
-      runTime_(time),
-      boundaryField_(fileName, mesh, time, action),
-      action_(action)
+VolField<vectorType>::VolField(const IOObject& IO)
+    : IODictionary(IO),
+      boundaryField_(IO)
 {
   // Check action
-  if (action  == MUST_READ)
+  if (read() == MUST_READ)
   {
       internalField_=readInternalField();
   }
-  else if (action == NO_READ)
+  else if (read() == NO_READ)
   {
-      internalField_.resize(mesh.nCells_);
+      internalField_.resize(this->mesh().nCells_);
   }
   else
   {
@@ -24,15 +21,21 @@ VolField<vectorType>::VolField(std::string fileName, const Mesh &mesh, const Run
 }
 
 template <typename vectorType>
-VolField<vectorType>::VolField(std::string fileName, const Mesh &mesh, const RunTime &time, fileAction action, const typename vectorType::value_type& defaultValue)
-    : IODictionary(time.Path(), fileName),
-      mesh_(mesh),
-      runTime_(time),
-      boundaryField_(fileName, mesh, time, action, defaultValue),
-      action_(action)
+VolField<vectorType>::VolField(const IOObject& IO, const typename vectorType::value_type& defaultValue)
+  : IODictionary(IO),
+    boundaryField_(IO, defaultValue)
 {
-      internalField_.resize(mesh.nCells_, defaultValue);
+      internalField_.resize(this->mesh().nCells_, defaultValue);
 }
+
+template <typename vectorType>
+VolField<vectorType>::VolField(const VolField<vectorType>& vf)
+  : IODictionary(vf),
+  internalField_(vf.internalField_),
+  boundaryField_(vf.boundaryField_)
+{}
+
+
 
 // Give access to the boundary entities
 template <typename vectorType>
@@ -40,3 +43,28 @@ BoundaryField<vectorType>& VolField<vectorType>::boundaryField()
 {
   return boundaryField_;
 }
+
+template <typename vectorType>
+vectorType& VolField<vectorType>::internalFieldRef() 
+{
+  return internalField_;
+}
+
+template <typename vectorType>
+const vectorType& VolField<vectorType>::internalField() const 
+{
+  return internalField_;
+}
+
+template <typename vectorType>
+VolField<vectorType>& VolField<vectorType>::operator=(const VolField<vectorType>& vf)
+{
+  if (this == &vf)
+        return *this;
+
+  internalField_ = vf.internalField_;
+  boundaryField_ = vf.boundaryField_;
+  
+  return *this;
+}
+

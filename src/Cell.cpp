@@ -100,7 +100,7 @@ void Cell::computeCenter()
 }
 
 
-double Cell::computepyrVol( const vector3& Sf, const vector3& Cf  , const vector3& geometricCenter)const
+double Cell::computepyrVol(const vector3& Sf, const vector3& Cf, const vector3& geometricCenter)const
 {
     double VSMALL = 1.0e-37;
 

@@ -2,15 +2,15 @@
 
 // Constructor by Reading Input file to initialize data members 
 template <typename vectorType>
-Boundary<vectorType>::Boundary(std::string fileName, const Patch& patch, const RunTime& time, fileAction action)
-    : IODictionary(time.Path(), fileName),
+Boundary<vectorType>::Boundary(const IOObject& IO, const Patch& patch)
+    : IODictionary(IO),
       name_(patch.name())
 {
-    if (action == MUST_READ)
+    if (read() == fileAction::MUST_READ)
     {
         readBoundaryPatch(patch.name());
     }
-    else if (action == NO_READ)
+    else if (read() == fileAction::NO_READ)
     {
         this->type_="calculated";
         this->uniformField_=false;
@@ -30,21 +30,36 @@ Boundary<vectorType>::Boundary(std::string fileName, const Patch& patch, const R
     // Verifying if the patch size is in agreement with the mesh Patch size
     if ((!this->uniformField_) && (this->type_!="empty") && this->definedValues_.size() != (long unsigned int)patch.nFaces())
     {
-        std::cerr << "The input data for the patch named as \" " << patch.name() << " \" for the field " << fileName << " in the file " << time.Path() << fileName << " has " << this->definedValues_.size() << " entries, while this patch allows only " << patch.nFaces()  << " face!" << std::endl;
+        std::cerr << "The input data for the patch named as \" "
+        << patch.name() << " \" for the field " << this->name() 
+        << " in the file " << this->mesh().time().Path() << this->name() 
+        << " has " << this->definedValues_.size() 
+        << " entries, while this patch allows only " << patch.nFaces()  << " face!" << std::endl;
         throw std::runtime_error(" ");
     }
 }
 
 // Constructing with a default value passed by argument
 template <typename vectorType>
-Boundary<vectorType>::Boundary(std::string fileName, const Patch& patch, const RunTime& time, fileAction action, const typename vectorType::value_type& defaultValue)
-    : IODictionary(time.Path(), fileName),
+Boundary<vectorType>::Boundary(const IOObject& IO, const Patch& patch, const typename vectorType::value_type& defaultValue)
+    : IODictionary(IO),
       name_(patch.name())
 {
     this->type_="calculated";
     this->uniformField_=false;
     this->definedValues_.resize(patch.nFaces(), defaultValue);
 }
+
+
+template <typename vectorType>
+Boundary<vectorType>::Boundary(const Boundary<vectorType>& bf)
+    : IODictionary(bf),
+      name_ (bf.name_),
+      type_(bf.type_),
+      uniformField_ (bf.uniformField_),
+      definedValues_ (bf.definedValues_),
+      otherInfo_(bf.otherInfo_)
+   {}
 
 
 // Member function to access the boundary patch defined values
@@ -63,7 +78,7 @@ const std::string& Boundary<vectorType>::name()
 
 // Member function to access the boundary patch defined type ( fixedValue, fixedGradient, symmetry, and etc. )
 template <typename vectorType>
-std::string& Boundary<vectorType>::type()
+const std::string& Boundary<vectorType>::type()
 {
   return type_;
 }
@@ -107,4 +122,20 @@ typename vectorType::value_type Boundary<vectorType>::operator[](unsigned int po
       exit(0);
   }
   return this->definedValues_.at(posI);
+}
+
+
+template <typename vectorType>
+Boundary<vectorType>& Boundary<vectorType>::operator=(const Boundary<vectorType>& bf)
+{
+  if (this == &bf)
+        return *this;
+
+  // name_ = bf.name_;
+  // type_ = bf.type_;
+  // uniformField_ = bf.uniformField_;
+  // definedValues_ = bf.definedValues_;
+  // otherInfo_ = bf.otherInfo_;
+  
+  return *this;
 }

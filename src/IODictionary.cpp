@@ -1,29 +1,10 @@
 #include "IODictionary.h"
 
 
-IODictionary::IODictionary(std::string path, std::string fileName)
+IODictionary::IODictionary(const IOObject& IO)
 :
-    path_(path),
-    fileName_(fileName)
+    IOObject (IO)
 {}
-
-
-const std::string& IODictionary::Path() const
-{
-    return path_;
-}
-
-const std::string& IODictionary::Name() const
-{
-    return fileName_;
-}
-
-bool IODictionary::setPath (std::string& newPath)
-{
-    path_ = newPath;
-
-    return true;
-}
 
 int  IODictionary::countCharactersInString(const std::string& line)
 {
@@ -39,6 +20,13 @@ int  IODictionary::countCharactersInString(const std::string& line)
 
     return nchars;
 }
+
+
+IODictionary::IODictionary(const IODictionary& IOdict)
+:
+    IOObject (IOdict)
+{}
+
 
 
 std::vector<std::string> IODictionary::splitString(const std::string& line, char delimiter) {
@@ -373,7 +361,7 @@ std::string IODictionary::findAsString( const std::string& path, const std::stri
     // Checks if file is to be open correctly
     if(!in_file.is_open())
     {
-        std::cerr << "The input file was not open correctly!" << std::endl;
+        std::cerr << "" << std::endl;
         //return 1;
     }
 

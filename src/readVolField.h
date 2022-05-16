@@ -39,7 +39,7 @@ template< typename vectorType>
 vectorType VolField<vectorType>::readInternalField()
 {
     // File location path
-    std::string fileLocation = this->Path() + this->Name();
+    std::string fileLocation = this->path();
 
     // Passes the file location path into a ifsteam
     std::ifstream in_file(fileLocation.c_str());
@@ -151,7 +151,7 @@ vectorType VolField<vectorType>::readInternalField()
 
     if (in_file.eof() )
     {
-        std::string message = "Keyword 'internalField not defined in " + this->Name();
+        std::string message = "Keyword 'internalField not defined in " + this->name();
         errorMessage(in_file, message, 0, true);
     }
 

@@ -8,25 +8,20 @@
 #include <iostream>
 #include <sstream> 
 #include <algorithm>
-
-
-enum fileAction {
-     //Read signature
-      MUST_READ=1,
-      NO_READ=2
-};
-
+#include "IOObject.h"
 
 class IODictionary
+:
+public IOObject
 {
     public:
         // Constructor
-        IODictionary(std::string path, std::string fileName);
+        IODictionary(const IOObject& IO);
+
+        IODictionary(const IODictionary& IODict);
         
         // Destructor
         virtual ~IODictionary(){} ;
-
-        bool setPath (std::string& newPath);
         
     protected:
 	
@@ -91,12 +86,7 @@ class IODictionary
 	* If the '*\/' is not found in the line supplyed by the user, the function will keep on getting new lines until it finds the '*\/'. Afterwards it will return the NEXT line.
 	* */
 		std::string stripBlockComment(std::ifstream& in_file, std::string& line, int& lineCounter);
-	
-	
-	
-	
-	
-	
+		
     /*!@brief 
      * Selector function to strip comments. 
      * Will choose stripSingleComment() or stripBlockComment() depending on the function \p line argument.
@@ -157,13 +147,6 @@ class IODictionary
         
         template <typename primitiveType>
         primitiveType readVectorTensorData(std::ifstream& in_file, std::istringstream& iss, std::string& line, int lineCounter);
-
-        const std::string& Path() const;
-        const std::string& Name() const;
-
-    private:
-        std::string path_;
-        std::string fileName_;
 };
 
 

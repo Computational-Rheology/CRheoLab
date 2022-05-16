@@ -1,13 +1,15 @@
 #include "Mesh.h"
 
 
-Mesh::Mesh()
+Mesh::Mesh(const RunTime& time)
 : nPoints_(0),
   nFaces_(0),
   nInteriorFaces_(0),
   nBoundaryFaces_(0),
   nCells_(0),
-  nPatches_(0)
+  nPatches_(0),
+  dataBase_(),
+  time_(time)
 { 
   readMesh();
 }
@@ -457,7 +459,7 @@ void Mesh::readBoundary(std::string path)
         }  
       }
 
-      patchList_.push_back(Patch(name,type, nFaces,startFace, i)); //add a Patch object to the list
+      patchList_.push_back(Patch(name, type, nFaces, startFace)); //add a Patch object to the list
 
       checkBoundaryName = false;
       checkType = false;
@@ -478,6 +480,24 @@ void Mesh::readBoundary(std::string path)
   // Close the file
   in_file.close();
 }
+
+
+bool Mesh::addToDataBase(IOObject* obj)
+{
+  dataBase_.push_back(obj);
+  return true;
+}
+
+std::vector <IOObject*>& Mesh::dataBaseRef() 
+{
+    return dataBase_;
+}
+
+const std::vector <IOObject*>& Mesh::dataBase() const
+{
+    return dataBase_;
+}
+
 
 
 

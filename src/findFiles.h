@@ -108,7 +108,7 @@ inline std::string getTimeFolder()
         throw std::runtime_error(errorMessage);
     }
 
-    return currentFolder;
+    return currentFolder+"/";
 }
 
 

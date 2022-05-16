@@ -22,10 +22,12 @@ class VolField
     public:
 
         // Default constructor
-        VolField(std::string fileName, const Mesh& mesh, const RunTime& time, fileAction action);
+        VolField(const IOObject& IO);
 
         // Constructor with a default value passed by argument
-        VolField(std::string fileName, const Mesh& mesh, const RunTime& time, fileAction action, const typename vectorType::value_type& defaultValue);
+        VolField(const IOObject& IO, const typename vectorType::value_type& defaultValue);
+
+        VolField(const VolField& vf);
 
         // Destructor
         virtual ~VolField(){} ;
@@ -40,15 +42,19 @@ class VolField
         // Give access to the boundary entities
         BoundaryField<vectorType>& boundaryField();
 
+        vectorType& internalFieldRef();
+        const vectorType& internalField() const;
+
+        VolField& operator=(const VolField &vf);
+
     private:
-        const Mesh& mesh_;
-        const RunTime& runTime_;
+        
         vectorType internalField_;
         BoundaryField<vectorType> boundaryField_;
-        fileAction action_;
+        
 
 };
 
 #include "VolFieldI.h"
-
+#include "VolFieldOperations.h"
 #endif

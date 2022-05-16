@@ -16,6 +16,9 @@ class RunTime
     std::string Path() const;
     const std::string& Folder() const;
     void setFolder(std::string& newFolder);
+    const std::string constant () const;
+    const std::string system () const;
+    const std::string timeName () const;
 
     private:
         std::string path_;
