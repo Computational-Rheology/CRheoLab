@@ -1,1 +1,0 @@
-/usr/bin/c++ -fPIC -shared -Wl,-soname,libMesh.so -o libMesh.so CMakeFiles/Mesh.dir/src/Cell.cpp.o CMakeFiles/Mesh.dir/src/Face.cpp.o CMakeFiles/Mesh.dir/src/IODictionary.cpp.o CMakeFiles/Mesh.dir/src/Mesh.cpp.o CMakeFiles/Mesh.dir/src/Patch.cpp.o CMakeFiles/Mesh.dir/src/Point.cpp.o CMakeFiles/Mesh.dir/src/RunTime.cpp.o 
