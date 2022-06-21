@@ -1,5 +1,5 @@
-#ifndef dictionary_H
-#define dictionary_H
+#ifndef Dictionary_H
+#define Dictionary_H
 
 #include <string>
 #include <vector>
@@ -12,14 +12,14 @@
 #include "IOObject.h"
 
 
-class dictionary
+class Dictionary
 :
 public IOObject
 {
 
     public:
-        dictionary(const IOObject& IO);
-        dictionary(const dictionary& dict, bool append);
+        Dictionary(const IOObject& IO);
+        Dictionary(const Dictionary& dict, bool append);
 
         
         std::string stripSingleComment(std::string& line);
@@ -43,11 +43,11 @@ public IOObject
         bool read();
         bool clear();
         void bracketsTest(std::ifstream& in_file);
-        void readSubDict(dictionary& tmp, std::ifstream& in_file, std::istringstream& iss, std::string& line, unsigned int& lineCounter, const std::string& key);
-        void parseString (std::string& line, std::istringstream& iss, std::ifstream& in_file, dictionary& tmp2, unsigned int& lineCounter);
+        void readSubDict(Dictionary& tmp, std::ifstream& in_file, std::istringstream& iss, std::string& line, unsigned int& lineCounter, const std::string& key);
+        void parseString (std::string& line, std::istringstream& iss, std::ifstream& in_file, Dictionary& tmp2, unsigned int& lineCounter);
 
         // Utility function
-        const dictionary& subDict(const std::string& dictName) const;
+        const Dictionary& subDict(const std::string& dictName) const;
         
         template <typename T>
         T lookup(const std::string& keyWord) const;
@@ -57,11 +57,11 @@ public IOObject
         bool finishedReadingSubDicts_;
 
        std::vector<std::string> localData_;
-       std::map<std::string, dictionary> data_;
+       std::map<std::string, Dictionary> data_;
 
 };
 
-#include "dictionaryI.h"
+#include "DictionaryI.h"
 
 #endif 
 

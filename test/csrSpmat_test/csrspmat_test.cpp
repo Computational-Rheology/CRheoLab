@@ -36,7 +36,7 @@ int main(int argc, char const *argv[]) {
       Mesh mesh;
 
       // Declare and initialize a sparse matrix
-      csrSpmat spmat = csrSpmat(mesh);
+      csrSpmat spmatA = csrSpmat(mesh);
 
       std::cout << "#############################################################" << std::endl;
       std::cout << "Test sparse matrix to dense format" << std::endl;
@@ -46,7 +46,7 @@ int main(int argc, char const *argv[]) {
       std::vector< std::vector<double> > denseMatrix;
 
       // Returns the sparse matrix in a dense format as a vector of vectors
-      denseMatrix = spmat.dense();
+      denseMatrix = spmatA.dense();
 
       std::cout << "Dense matrix:" << std::endl;
 
@@ -74,7 +74,7 @@ int main(int argc, char const *argv[]) {
       v.resize(mesh.nCells_);
 
       // Call the function that calculates the product matrix-vector as a vector
-      v = spmat.matMul(vecPhi);
+      v = spmatA.matMul(vecPhi);
 
       std::cout << "Vector resulting from the matrix-vector product:" << std::endl;
       for (double valueV : v)
@@ -83,10 +83,40 @@ int main(int argc, char const *argv[]) {
       unsigned int rowMatVecProd = 2;
 
       // Call the function that calculates the product (row-of-matrix)-vector
-      double ProdRowMatVec = spmat.vecMul(rowMatVecProd, vecPhi);
+      double ProdRowMatVec = spmatA.vecMul(rowMatVecProd, vecPhi);
 
       std::cout << "Double resulting from the (row-of-matrix)-vector product:" << std::endl;
       std::cout << "For row: " << rowMatVecProd << ", Product: " << ProdRowMatVec << std::endl;
+
+      std::cout << "#############################################################" << std::endl;
+      std::cout << "Test sparse matrix addition" << std::endl;
+      std::cout << "#############################################################" << std::endl;
+
+      csrSpmat spmatB, spmatC;
+
+      // B
+
+      C = A+B;
+
+
+
+      // Returns the sparse matrix in a dense format as a vector of vectors
+      denseMatrix = spmatC.dense();
+
+      std::cout << "Dense matrix:" << std::endl;
+
+      for (unsigned int i = 0; i < denseMatrix.size(); i++)
+      {
+            for (unsigned int j = 0; j < denseMatrix[i].size(); j++)
+            {
+                  std::cout << denseMatrix[i][j] << " ";
+            }
+            std::cout << std::endl;
+      }
+      
+      std::cout << "#############################################################" << std::endl;
+      std::cout << "Test sparse matrix subtraction" << std::endl;
+      std::cout << "#############################################################" << std::endl;
 
       return 0;
 }

@@ -37,7 +37,7 @@ class Cell
     public:
 
         // cellID
-        int ID_;
+        unsigned int ID_;
 
         // Cell Volume
         double volume_;

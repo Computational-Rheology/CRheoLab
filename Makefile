@@ -4,7 +4,7 @@
 #
 
 # define the Cpp compiler to use
-CXX = g++
+CXX = g++-7
 
 # define any compile-time flags
 CXXFLAGS := -std=c++11 -g -Wall -I/usr/local/Cellar/boost/1.78.0_1/include/

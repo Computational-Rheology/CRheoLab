@@ -17,7 +17,7 @@ lilSpmat::lilSpmat(unsigned int numRows, unsigned int numCols)
 }
 
 // Returns the sparsity of the matrix
-double lilSpmat::sparsity()
+double lilSpmat::sparsity() const
 {
   unsigned int nz = 0;
   for(unsigned int i=0;i< numRows_;i++)
@@ -25,6 +25,24 @@ double lilSpmat::sparsity()
      nz += columns_[i].size();
   }
   return (1.0 - ((double)nz / ((double)(numRows_ * numCols_))));
+}
+
+//
+unsigned int lilSpmat::getNbNZ(const unsigned int &i) const
+{
+      return columns_[i].size();
+}
+
+//
+double lilSpmat::getNZValue(const unsigned int &i, const unsigned int &j) const
+{
+      return values_[i][j];
+}
+
+//
+unsigned int lilSpmat::getNZColumn(const unsigned int &i, const unsigned int &j) const
+{
+      return columns_[i][j];
 }
 
 // Sets a value to position (i,j) if exists, otherwise inserts a new value
@@ -87,7 +105,7 @@ void lilSpmat::delValue(const unsigned int& i, const unsigned int& j)
 }
 
 // Returns the value in position (i,j) if exists, otherwise returns 0
-double lilSpmat::getValue(const unsigned int& i, const unsigned int& j)
+double lilSpmat::getValue(const unsigned int& i, const unsigned int& j) const
 {
   for(unsigned int k=0;k<columns_[i].size();k++)
   {
@@ -100,7 +118,7 @@ double lilSpmat::getValue(const unsigned int& i, const unsigned int& j)
 }
 
 // Returns the sparse matrix in a dense format as a vector of vectors
-std::vector< std::vector<double> > lilSpmat::dense()
+std::vector< std::vector<double> > lilSpmat::dense() const
 {
   std::vector< std::vector<double> > denseMatrix(numRows_);
   std::vector<double> temp(numCols_);
@@ -121,7 +139,7 @@ std::vector< std::vector<double> > lilSpmat::dense()
 }
 
 // Function that returns the product matrix-vector as a vector
-std::vector<double> lilSpmat::matMul(const std::vector<double>& vecPhi)
+std::vector<double> lilSpmat::matMul(const std::vector<double>& vecPhi) const
 {
   std::vector<double> v(vecPhi.size());
   unsigned int id_column = 0;
@@ -138,7 +156,7 @@ std::vector<double> lilSpmat::matMul(const std::vector<double>& vecPhi)
 }
 
 // Returns the product (row-of-matrix)-vector for a specific row of the matrix as a double
-double lilSpmat::vecMul(const unsigned int& i, const std::vector<double>& vecPhi)
+double lilSpmat::vecMul(const unsigned int& i, const std::vector<double>& vecPhi) const
 {
   double sumProdRow = 0.0;
   unsigned int id_column = 0;
@@ -151,7 +169,7 @@ double lilSpmat::vecMul(const unsigned int& i, const std::vector<double>& vecPhi
 }
 
 // Returns the product (row-of-matrix)-vector for a specific row of the matrix as a double excluding the diagonal
-double lilSpmat::vecMulNoDiagonal(const unsigned int& i, const std::vector<double>& vecPhi)
+double lilSpmat::vecMulNoDiagonal(const unsigned int& i, const std::vector<double>& vecPhi) const
 {
   double sumProdRow = 0.0;
   unsigned int id_column = 0;
@@ -164,7 +182,7 @@ double lilSpmat::vecMulNoDiagonal(const unsigned int& i, const std::vector<doubl
 }
 
 // Returns a double given by the sum of the products of xValue (a double) for a specific row of the matrix
-double lilSpmat::xValueProduct(const unsigned int& i, const double& xValue)
+double lilSpmat::xValueProduct(const unsigned int& i, const double& xValue) const
 {
   double sumProdRow = 0.0;
   for(unsigned int j=0;j<columns_[i].size();j++)
@@ -172,4 +190,32 @@ double lilSpmat::xValueProduct(const unsigned int& i, const double& xValue)
     sumProdRow += values_[i][j] * xValue;
   }
   return sumProdRow;
+}
+
+//
+lilSpmat operator+(const lilSpmat& A,const lilSpmat& B)
+{
+      lilSpmat C = A;
+      for(unsigned int i=0;i<B.getNumRows();i++)
+      {
+            for(unsigned int j=0;j<B.getNbNZ(i);j++)
+            {
+                  C.addValue(i,B.getNZColumn(i,j),B.getNZValue(i,j));
+            }
+      }
+      return C;
+}
+
+//
+lilSpmat operator-(const lilSpmat& A,const lilSpmat& B)
+{
+      lilSpmat C = A;
+      for(unsigned int i=0;i<B.getNumRows();i++)
+      {
+            for(unsigned int j=0;j<B.getNbNZ(i);j++)
+            {
+                  C.subValue(i,B.getNZColumn(i,j),B.getNZValue(i,j));
+            }
+      }
+      return C;
 }

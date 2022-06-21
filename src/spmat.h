@@ -18,19 +18,28 @@ public:
 public:
 
   // Returns the sparsity of the matrix
-  double virtual sparsity() = 0;
+  double virtual sparsity() const = 0;
 
   // Returns the number of rows
-  unsigned int getNumRows()
+  unsigned int getNumRows() const
   {
     return numRows_;
   }
 
   // Returns the number of columns
-  unsigned int getNumCols()
+  unsigned int getNumCols() const
   {
     return numCols_;
   }
+
+  //
+  virtual unsigned int getNbNZ(const unsigned int &i) const = 0;
+
+  //
+  virtual double getNZValue(const unsigned int &i, const unsigned int &j) const = 0;
+
+  //
+  virtual unsigned int getNZColumn(const unsigned int &i, const unsigned int &j) const = 0;
 
   // Sets a value to position (i,j) if exists, otherwise inserts a new value
   virtual void setValue(const unsigned int &i, const unsigned int &j, const double &val) = 0;
@@ -45,22 +54,22 @@ public:
   virtual void delValue(const unsigned int &i, const unsigned int &j) = 0;
 
   // Returns the value in position (i,j) if exists, otherwise returns 0
-  virtual double getValue(const unsigned int &i, const unsigned int &j) = 0;
+  virtual double getValue(const unsigned int &i, const unsigned int &j) const = 0;
 
   // Returns the sparse matrix in a dense format as a vector of vectors
-  virtual std::vector< std::vector<double> > dense() = 0;
+  virtual std::vector< std::vector<double> > dense() const = 0;
 
   // Returns the product matrix-vector as a vector
-  virtual std::vector<double> matMul(const std::vector<double> &vecPhi) = 0;
+  virtual std::vector<double> matMul(const std::vector<double> &vecPhi) const = 0;
 
   // Returns the product (row-of-matrix)-vector for a specific row of the matrix as a double
-  virtual double vecMul(const unsigned int &i, const std::vector<double> &vecPhi) = 0;
+  virtual double vecMul(const unsigned int &i, const std::vector<double> &vecPhi) const = 0;
 
   // Returns the product (row-of-matrix)-vector for a specific row of the matrix as a double excluding the diagonal
-  virtual double vecMulNoDiagonal(const unsigned int &i, const std::vector<double> &vecPhi) = 0;
+  virtual double vecMulNoDiagonal(const unsigned int &i, const std::vector<double> &vecPhi) const = 0;
 
   // Returns a double given by the sum of the products of xValue (a double) for the elements of the iRow matrix row
-  virtual double xValueProduct(const unsigned int &i, const double &xValue) = 0;
+  virtual double xValueProduct(const unsigned int &i, const double &xValue) const = 0;
 
 };
 

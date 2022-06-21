@@ -1,7 +1,7 @@
 
 
 template <typename T>
-T dictionary::lookup(const std::string& keyWord) const
+T Dictionary::lookup(const std::string& keyWord) const
 {
     for(unsigned int i = 0; i<localData_.size(); i++) 
     {

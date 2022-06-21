@@ -33,8 +33,17 @@ public:
   // Destructor
   virtual ~csrSpmat(){};
 
+  //
+  unsigned int getNbNZ(const unsigned int &i) const override;
+
+  //
+  double getNZValue(const unsigned int &i, const unsigned int &j) const override;
+
+  //
+  unsigned int getNZColumn(const unsigned int &i, const unsigned int &j) const override;
+
   // Returns the sparsity of the matrix
-  double sparsity() override;
+  double sparsity() const override;
 
   // Sets a value to position (i,j) if exists, otherwise inserts a new value
   void setValue(const unsigned int& i, const unsigned int& j, const double& val) override;
@@ -49,23 +58,29 @@ public:
   void delValue(const unsigned int& i, const unsigned int& j) override;
 
   // Returns the value in position (i,j) if exists, otherwise returns 0
-  double getValue(const unsigned int& i, const unsigned int& j) override;
+  double getValue(const unsigned int& i, const unsigned int& j) const override;
 
   // Returns the sparse matrix in a dense format as a vector of vectors
-  std::vector< std::vector<double> > dense() override;
+  std::vector< std::vector<double> > dense() const override;
 
   // Returns the product matrix-vector as a vector
-  std::vector<double> matMul(const std::vector<double>& vecPhi) override;
+  std::vector<double> matMul(const std::vector<double>& vecPhi) const override;
 
   // Returns the product (row-of-matrix)-vector for a specific row of the matrix as a double
-  double vecMul(const unsigned int& i, const std::vector<double>& vecPhi) override;
+  double vecMul(const unsigned int& i, const std::vector<double>& vecPhi) const override;
 
   // Returns the product (row-of-matrix)-vector for a specific row of the matrix as a double excluding the diagonal
-  double vecMulNoDiagonal(const unsigned int& i, const std::vector<double>& vecPhi) override;
+  double vecMulNoDiagonal(const unsigned int& i, const std::vector<double>& vecPhi) const override;
 
   // Returns a double given by the sum of the products of xValue (a double) for the elements of the iRow matrix row
-  double xValueProduct(const unsigned int& i, const double& xValue) override;
+  double xValueProduct(const unsigned int& i, const double& xValue) const override;
 
 };
+
+//
+csrSpmat operator+(const csrSpmat& A,const csrSpmat& B);
+
+//
+csrSpmat operator-(const csrSpmat& A,const csrSpmat& B);
 
 #endif // CSRSPMAT_H

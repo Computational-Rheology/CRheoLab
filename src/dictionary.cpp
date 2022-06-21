@@ -1,6 +1,6 @@
-#include "dictionary.h"
+#include "Dictionary.h"
 
-dictionary::dictionary(const IOObject& IO)
+Dictionary::Dictionary(const IOObject& IO)
 :
 IOObject(IO),
 nOpenParenthesis_(0),
@@ -9,7 +9,7 @@ finishedReadingSubDicts_(false)
    read();
 }
 
-void dictionary::bracketsTest(std::ifstream& in_file)            
+void Dictionary::bracketsTest(std::ifstream& in_file)            
 {
     
     int openedBracketCounter(0);
@@ -40,7 +40,7 @@ void dictionary::bracketsTest(std::ifstream& in_file)
     in_file.seekg(0);
 }
 
-dictionary::dictionary(const dictionary& dict, bool append)
+Dictionary::Dictionary(const Dictionary& dict, bool append)
 :
 IOObject(dict),
 nOpenParenthesis_(dict.nOpenParenthesis_),
@@ -53,7 +53,7 @@ finishedReadingSubDicts_(dict.finishedReadingSubDicts_)
   }  
 }
 
-std::string dictionary::stripSingleComment(std::string& line)
+std::string Dictionary::stripSingleComment(std::string& line)
 {
     // strips from the string '//' onwards
     line=line.substr(0, line.find("//"));
@@ -61,7 +61,7 @@ std::string dictionary::stripSingleComment(std::string& line)
 }
 
 
-std::string dictionary::stripBlockComment(std::ifstream& in_file, std::string& line, unsigned int& lineCounter)
+std::string Dictionary::stripBlockComment(std::ifstream& in_file, std::string& line, unsigned int& lineCounter)
 {
     // Booleans to catch line and block comments
     bool findEndOfBlockComment = false;
@@ -95,7 +95,7 @@ std::string dictionary::stripBlockComment(std::ifstream& in_file, std::string& l
     return line;
 }
 
-std::string dictionary::stripComments(std::ifstream& in_file, std::string& line, unsigned int& lineCounter)
+std::string Dictionary::stripComments(std::ifstream& in_file, std::string& line, unsigned int& lineCounter)
 {
     bool checkComments=false;
 
@@ -119,7 +119,7 @@ std::string dictionary::stripComments(std::ifstream& in_file, std::string& line,
 }
 
 
-void dictionary::newLineAndUpdateSStream(std::ifstream& in_file, std::istringstream& iss, std::string& line, unsigned int& lineCounter, bool updateStringStream)
+void Dictionary::newLineAndUpdateSStream(std::ifstream& in_file, std::istringstream& iss, std::string& line, unsigned int& lineCounter, bool updateStringStream)
 {
     getline(in_file, line);
     lineCounter++;
@@ -143,7 +143,7 @@ void dictionary::newLineAndUpdateSStream(std::ifstream& in_file, std::istringstr
     }
 }
 
-bool dictionary::checkExactMatch(const std::string& line,const std::string& keyWord) const
+bool Dictionary::checkExactMatch(const std::string& line,const std::string& keyWord) const
 {
     // Check if string has a partial match
     const std::size_t index = line.find(keyWord);
@@ -177,7 +177,7 @@ bool dictionary::checkExactMatch(const std::string& line,const std::string& keyW
 }
 
 
-bool dictionary::checkCharacter(std::ifstream& in_file, std::istringstream& iss, const char& C)
+bool Dictionary::checkCharacter(std::ifstream& in_file, std::istringstream& iss, const char& C)
 {
     char c1;
 
@@ -191,7 +191,7 @@ bool dictionary::checkCharacter(std::ifstream& in_file, std::istringstream& iss,
     return true;
 }
 
-void dictionary::errorMessage(std::ifstream& in_file, const std::string& message, const unsigned int& lineCounter, bool turnOfLinePrinting)
+void Dictionary::errorMessage(std::ifstream& in_file, const std::string& message, const unsigned int& lineCounter, bool turnOfLinePrinting)
 {
     // Error message to the user
     std::string errorMessage = message ;
@@ -208,7 +208,7 @@ void dictionary::errorMessage(std::ifstream& in_file, const std::string& message
     throw std::runtime_error(errorMessage);
 }
 
-void dictionary::stripString(std::string& line, const std::string& word) const
+void Dictionary::stripString(std::string& line, const std::string& word) const
 {
     const std::size_t index = line.find(word);
     if (index != std::string::npos)
@@ -217,7 +217,7 @@ void dictionary::stripString(std::string& line, const std::string& word) const
     }
 }
 
-void dictionary::rightTrimWhiteSpaces(std::string& line)
+void Dictionary::rightTrimWhiteSpaces(std::string& line)
 {
     line.erase(std::find_if(line.rbegin(), line.rend(), [](unsigned char ch)
     {
@@ -225,7 +225,7 @@ void dictionary::rightTrimWhiteSpaces(std::string& line)
     }).base(), line.end());
 }
 
-void dictionary::leftTrimWhiteSpaces(std::string& line)
+void Dictionary::leftTrimWhiteSpaces(std::string& line)
 {
     line.erase(line.begin(), std::find_if(line.begin(), line.end(), [](unsigned char ch) 
     {
@@ -233,15 +233,15 @@ void dictionary::leftTrimWhiteSpaces(std::string& line)
     }));
 }
 
-void dictionary::trimWhiteSpaces(std::string& line)
+void Dictionary::trimWhiteSpaces(std::string& line)
 {
     leftTrimWhiteSpaces(line);
     rightTrimWhiteSpaces(line);
 }
 
-void dictionary::readSubDict(dictionary& tmp, std::ifstream& in_file, std::istringstream& iss, std::string& line, unsigned int& lineCounter,const std::string& key)
+void Dictionary::readSubDict(Dictionary& tmp, std::ifstream& in_file, std::istringstream& iss, std::string& line, unsigned int& lineCounter,const std::string& key)
 {
-    dictionary tmp2(tmp, false);
+    Dictionary tmp2(tmp, false);
 
     std::string keyword;
 
@@ -290,7 +290,7 @@ void dictionary::readSubDict(dictionary& tmp, std::ifstream& in_file, std::istri
 }
 
 
-const dictionary& dictionary::subDict(const std::string& dictName) const
+const Dictionary& Dictionary::subDict(const std::string& dictName) const
 {
     if(data_.count(dictName))
     {
@@ -303,7 +303,7 @@ const dictionary& dictionary::subDict(const std::string& dictName) const
 }
 
 
-std::vector<std::string> dictionary::splitStringByChar(const std::string& line, const char& C)
+std::vector<std::string> Dictionary::splitStringByChar(const std::string& line, const char& C)
 {
     std::string subString (line);
     std::stringstream ss(line);
@@ -317,7 +317,7 @@ std::vector<std::string> dictionary::splitStringByChar(const std::string& line, 
     return vectorList;
 }
 
-bool dictionary::read()
+bool Dictionary::read()
 {
 
     // Passes the file location path into a ifsteam
@@ -410,7 +410,7 @@ bool dictionary::read()
 
 
 
-void dictionary::parseString (std::string& line, std::istringstream& iss, std::ifstream& in_file, dictionary& tmp2, unsigned int& lineCounter)
+void Dictionary::parseString (std::string& line, std::istringstream& iss, std::ifstream& in_file, Dictionary& tmp2, unsigned int& lineCounter)
 {
     std::string subString;
 

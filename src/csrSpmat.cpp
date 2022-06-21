@@ -83,8 +83,26 @@ csrSpmat::csrSpmat(Mesh& mesh)
   row_ptr_[numRows_] = nz;
 }
 
+//
+unsigned int csrSpmat::getNbNZ(const unsigned int &i) const
+{
+      return (row_ptr_[i+1]-row_ptr_[i]);
+}
+
+//
+double csrSpmat::getNZValue(const unsigned int &i, const unsigned int &j) const
+{
+      return values_[row_ptr_[i]+j];
+}
+
+//
+unsigned int csrSpmat::getNZColumn(const unsigned int &i, const unsigned int &j) const
+{
+      return columns_[row_ptr_[i]+j];
+}
+
 // Returns the sparsity of the matrix
-double csrSpmat::sparsity()
+double csrSpmat::sparsity() const
 {
   return (1.0 - ((double)numNZ_ / ((double)(numRows_ * numCols_))));
 }
@@ -150,7 +168,7 @@ void csrSpmat::delValue(const unsigned int& i, const unsigned int& j)
 }
 
 // Returns the value in position (i,j) if exists, otherwise returns 0
-double csrSpmat::getValue(const unsigned int& i, const unsigned int& j)
+double csrSpmat::getValue(const unsigned int& i, const unsigned int& j) const
 {
   for (unsigned int k=row_ptr_[i];k<row_ptr_[i+1];k++)
   {
@@ -163,7 +181,7 @@ double csrSpmat::getValue(const unsigned int& i, const unsigned int& j)
 }
 
 // Returns the sparse matrix in a dense format as a vector of vectors
-std::vector< std::vector<double> > csrSpmat::dense()
+std::vector< std::vector<double> > csrSpmat::dense() const
 {
   std::vector< std::vector<double> > denseMatrix(numCols_, std::vector<double>(numCols_));
   unsigned int id_column = 0;
@@ -179,7 +197,7 @@ std::vector< std::vector<double> > csrSpmat::dense()
 }
 
 // Function that returns the product matrix-vector as a vector
-std::vector<double> csrSpmat::matMul(const std::vector<double>& vecPhi)
+std::vector<double> csrSpmat::matMul(const std::vector<double>& vecPhi) const
 {
   std::vector<double> v(vecPhi.size());
   unsigned int j = 0;
@@ -196,7 +214,7 @@ std::vector<double> csrSpmat::matMul(const std::vector<double>& vecPhi)
 }
 
 // Returns the product (row-of-matrix)-vector for a specific row of the matrix as a double
-double csrSpmat::vecMul(const unsigned int& i, const std::vector<double>& vecPhi)
+double csrSpmat::vecMul(const unsigned int& i, const std::vector<double>& vecPhi) const
 {
   double sumProdRow = 0.0;
   unsigned int j = row_ptr_[i];
@@ -209,7 +227,7 @@ double csrSpmat::vecMul(const unsigned int& i, const std::vector<double>& vecPhi
 }
 
 // Returns the product (row-of-matrix)-vector for a specific row of the matrix as a double excluding the diagonal
-double csrSpmat::vecMulNoDiagonal(const unsigned int& i,const std::vector<double>& vecPhi)
+double csrSpmat::vecMulNoDiagonal(const unsigned int& i,const std::vector<double>& vecPhi) const
 {
   double sumProdRow = 0.0;
   unsigned int j = row_ptr_[i];
@@ -225,7 +243,7 @@ double csrSpmat::vecMulNoDiagonal(const unsigned int& i,const std::vector<double
 }
 
 // Returns a double given by the sum of the products of xValue (a double) for a specific row of the matrix
-double csrSpmat::xValueProduct(const unsigned int& i, const double& xValue)
+double csrSpmat::xValueProduct(const unsigned int& i, const double& xValue) const
 {
   double sumProdRow = 0.0;
   unsigned int j = row_ptr_[i];
@@ -235,4 +253,32 @@ double csrSpmat::xValueProduct(const unsigned int& i, const double& xValue)
     j += 1;
   }
   return sumProdRow;
+}
+
+//
+csrSpmat operator+(const csrSpmat& A,const csrSpmat& B)
+{
+      csrSpmat C = A;
+      for(unsigned int i=0;i<B.getNumRows();i++)
+      {
+            for(unsigned int j=0;j<B.getNbNZ(i);j++)
+            {
+                  C.addValue(i,B.getNZColumn(i,j),B.getNZValue(i,j));
+            }
+      }
+      return C;
+}
+
+//
+csrSpmat operator-(const csrSpmat& A,const csrSpmat& B)
+{
+      csrSpmat C = A;
+      for(unsigned int i=0;i<B.getNumRows();i++)
+      {
+            for(unsigned int j=0;j<B.getNbNZ(i);j++)
+            {
+                  C.subValue(i,B.getNZColumn(i,j),B.getNZValue(i,j));
+            }
+      }
+      return C;
 }

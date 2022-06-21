@@ -119,5 +119,16 @@ int main(int argc, char const *argv[]) {
       std::cout << "Double resulting from the (row-of-matrix)-vector product:" << std::endl;
       std::cout << "For row: " << rowMatVecProd << ", Product: " << ProdRowMatVec << std::endl;
 
+      std::cout << "#############################################################" << std::endl;
+      std::cout << "Test sparse matrix addition" << std::endl;
+      std::cout << "#############################################################" << std::endl;
+
+
+      std::cout << "#############################################################" << std::endl;
+      std::cout << "Test sparse matrix subtraction" << std::endl;
+      std::cout << "#############################################################" << std::endl;
+
+      
+
       return 0;
 }
