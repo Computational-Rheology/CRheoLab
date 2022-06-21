@@ -195,27 +195,27 @@ double lilSpmat::xValueProduct(const unsigned int& i, const double& xValue) cons
 //
 lilSpmat operator+(const lilSpmat& A,const lilSpmat& B)
 {
-      lilSpmat C = A;
-      for(unsigned int i=0;i<B.getNumRows();i++)
-      {
-            for(unsigned int j=0;j<B.getNbNZ(i);j++)
-            {
-                  C.addValue(i,B.getNZColumn(i,j),B.getNZValue(i,j));
-            }
-      }
-      return C;
+  lilSpmat C = A;
+  for(unsigned int i=0;i<B.getNumRows();i++)
+  {
+    for(unsigned int j=0;j<B.getNbNZ(i);j++)
+    {
+      C.addValue(i,B.getNZColumn(i,j),B.getNZValue(i,j));
+    }
+  }
+  return C;
 }
 
 //
 lilSpmat operator-(const lilSpmat& A,const lilSpmat& B)
 {
-      lilSpmat C = A;
-      for(unsigned int i=0;i<B.getNumRows();i++)
-      {
-            for(unsigned int j=0;j<B.getNbNZ(i);j++)
-            {
-                  C.subValue(i,B.getNZColumn(i,j),B.getNZValue(i,j));
-            }
-      }
-      return C;
+  lilSpmat C = A;
+  for(unsigned int i=0;i<B.getNumRows();i++)
+  {
+    for(unsigned int j=0;j<B.getNbNZ(i);j++)
+    {
+      C.subValue(i,B.getNZColumn(i,j),B.getNZValue(i,j));
+    }
+  }
+  return C;
 }

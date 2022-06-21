@@ -71,6 +71,12 @@ public:
   // Returns a double given by the sum of the products of xValue (a double) for the elements of the iRow matrix row
   virtual double xValueProduct(const unsigned int &i, const double &xValue) const = 0;
 
+  // //
+  // virtual spmat& operator+(const spmat& A,const spmat& B) = 0;
+  //
+  // //
+  // virtual spmat& operator-(const spmat& A,const spmat& B) = 0;
+
 };
 
 #endif // SPMAT_H

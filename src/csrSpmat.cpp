@@ -258,27 +258,27 @@ double csrSpmat::xValueProduct(const unsigned int& i, const double& xValue) cons
 //
 csrSpmat operator+(const csrSpmat& A,const csrSpmat& B)
 {
-      csrSpmat C = A;
-      for(unsigned int i=0;i<B.getNumRows();i++)
-      {
-            for(unsigned int j=0;j<B.getNbNZ(i);j++)
-            {
-                  C.addValue(i,B.getNZColumn(i,j),B.getNZValue(i,j));
-            }
-      }
-      return C;
+  csrSpmat C = A;
+  for(unsigned int i=0;i<B.getNumRows();i++)
+  {
+    for(unsigned int j=0;j<B.getNbNZ(i);j++)
+    {
+      C.addValue(i,B.getNZColumn(i,j),B.getNZValue(i,j));
+    }
+  }
+  return C;
 }
 
 //
 csrSpmat operator-(const csrSpmat& A,const csrSpmat& B)
 {
-      csrSpmat C = A;
-      for(unsigned int i=0;i<B.getNumRows();i++)
-      {
-            for(unsigned int j=0;j<B.getNbNZ(i);j++)
-            {
-                  C.subValue(i,B.getNZColumn(i,j),B.getNZValue(i,j));
-            }
-      }
-      return C;
+  csrSpmat C = A;
+  for(unsigned int i=0;i<B.getNumRows();i++)
+  {
+    for(unsigned int j=0;j<B.getNbNZ(i);j++)
+    {
+      C.subValue(i,B.getNZColumn(i,j),B.getNZValue(i,j));
+    }
+  }
+  return C;
 }
