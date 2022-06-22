@@ -4,7 +4,7 @@
 #
 
 # define the Cpp compiler to use
-CXX = g++-8
+CXX = g++
 
 # define any compile-time flags
 CXXFLAGS := -std=c++11 -g -Wall -I/usr/local/Cellar/boost/1.78.0_1/include/
@@ -26,10 +26,10 @@ OBJ_DIR := obj
 # define bin directory
 BIN_DIR := bin
 
-MAIN := bin/CRheo
+MAIN := bin/*
 
 FIXPATH = $1
-RM = rm -f
+RM = rm -rf
 MD := mkdir -p
 
 # define the C source files
