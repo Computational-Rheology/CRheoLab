@@ -33,7 +33,9 @@ int main(int argc, char const *argv[]) {
       std::cout << "Test sparse matrix construction" << std::endl;
       std::cout << "#############################################################" << std::endl;
 
-      Mesh mesh;
+      RunTime time;
+
+      Mesh mesh(time);
 
       // Declare and initialize a sparse matrix
       csrSpmat spmatA = csrSpmat(mesh);
@@ -94,11 +96,10 @@ int main(int argc, char const *argv[]) {
 
       csrSpmat spmatB, spmatC;
 
-      // B
+      // Create new matrix B with addValue functions
 
-      C = A+B;
-
-
+      // Add matrices
+      spmatC = spmatA + spmatA;
 
       // Returns the sparse matrix in a dense format as a vector of vectors
       denseMatrix = spmatC.dense();
@@ -113,7 +114,7 @@ int main(int argc, char const *argv[]) {
             }
             std::cout << std::endl;
       }
-      
+
       std::cout << "#############################################################" << std::endl;
       std::cout << "Test sparse matrix subtraction" << std::endl;
       std::cout << "#############################################################" << std::endl;

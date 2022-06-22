@@ -34,40 +34,40 @@ int main(int argc, char const *argv[]) {
       std::cout << "#############################################################" << std::endl;
 
       // Declare and initialize a sparse matrix
-      lilSpmat spmat = lilSpmat(4,4);
+      lilSpmat spmatA = lilSpmat(4,4);
 
       // add values
-      spmat.addValue(0,0,1.0);
-      spmat.addValue(0,2,2.0);
-      spmat.addValue(1,1,3.0);
-      spmat.addValue(2,1,4.0);
-      spmat.addValue(2,3,5.0);
-      spmat.addValue(3,3,6.0);
+      spmatA.addValue(0,0,1.0);
+      spmatA.addValue(0,2,2.0);
+      spmatA.addValue(1,1,3.0);
+      spmatA.addValue(2,1,4.0);
+      spmatA.addValue(2,3,5.0);
+      spmatA.addValue(3,3,6.0);
 
       // add some garbage values
-      spmat.addValue(2,2,100.0);
-      spmat.addValue(3,2,100.0);
+      spmatA.addValue(2,2,100.0);
+      spmatA.addValue(3,2,100.0);
 
       // delete garbage values
-      spmat.delValue(2,2);
-      spmat.delValue(3,2);
+      spmatA.delValue(2,2);
+      spmatA.delValue(3,2);
 
       std::cout << "Columns indexes:" << std::endl;
-      for (unsigned int i = 0; i < spmat.columns_.size(); i++)
+      for (unsigned int i = 0; i < spmatA.columns_.size(); i++)
       {
-            for (unsigned int j = 0; j < spmat.columns_[i].size(); j++)
+            for (unsigned int j = 0; j < spmatA.columns_[i].size(); j++)
             {
-                  std::cout << spmat.columns_[i][j] << " ";
+                  std::cout << spmatA.columns_[i][j] << " ";
             }
             std::cout << std::endl;
       }
 
       std::cout << "Columns values:" << std::endl;
-      for (unsigned int i = 0; i < spmat.values_.size(); i++)
+      for (unsigned int i = 0; i < spmatA.values_.size(); i++)
       {
-            for (unsigned int j = 0; j < spmat.values_[i].size(); j++)
+            for (unsigned int j = 0; j < spmatA.values_[i].size(); j++)
             {
-                  std::cout << spmat.values_[i][j] << " ";
+                  std::cout << spmatA.values_[i][j] << " ";
             }
             std::cout << std::endl;
       }
@@ -80,7 +80,7 @@ int main(int argc, char const *argv[]) {
       std::vector< std::vector<double> > denseMatrix;
 
       // Returns the sparse matrix in a dense format as a vector of vectors
-      denseMatrix = spmat.dense();
+      denseMatrix = spmatA.dense();
 
       std::cout << "Dense matrix:" << std::endl;
       for (unsigned int i = 0; i < denseMatrix.size(); i++)
@@ -105,7 +105,7 @@ int main(int argc, char const *argv[]) {
       std::vector<double> v(4);
 
       // Call the function that calculates the product matrix-vector
-      v = spmat.matMul(vecPhi);
+      v = spmatA.matMul(vecPhi);
 
       std::cout << "Vector resulting from the matrix-vector product:" << std::endl;
       for (double valueV : v)
@@ -114,7 +114,7 @@ int main(int argc, char const *argv[]) {
       unsigned int rowMatVecProd = 2;
 
       // Call the function that calculates the product (row-of-matrix)-vector
-      double ProdRowMatVec = spmat.vecMul(rowMatVecProd, vecPhi);
+      double ProdRowMatVec = spmatA.vecMul(rowMatVecProd, vecPhi);
 
       std::cout << "Double resulting from the (row-of-matrix)-vector product:" << std::endl;
       std::cout << "For row: " << rowMatVecProd << ", Product: " << ProdRowMatVec << std::endl;
@@ -123,12 +123,30 @@ int main(int argc, char const *argv[]) {
       std::cout << "Test sparse matrix addition" << std::endl;
       std::cout << "#############################################################" << std::endl;
 
+      lilSpmat spmatB, spmatC;
+
+      // Create new matrix B with addValue functions
+
+      // Add matrices
+      spmatC = spmatA + spmatA;
+
+      // Returns the sparse matrix in a dense format as a vector of vectors
+      denseMatrix = spmatC.dense();
+
+      std::cout << "Dense matrix:" << std::endl;
+
+      for (unsigned int i = 0; i < denseMatrix.size(); i++)
+      {
+            for (unsigned int j = 0; j < denseMatrix[i].size(); j++)
+            {
+                  std::cout << denseMatrix[i][j] << " ";
+            }
+            std::cout << std::endl;
+      }
 
       std::cout << "#############################################################" << std::endl;
       std::cout << "Test sparse matrix subtraction" << std::endl;
       std::cout << "#############################################################" << std::endl;
-
-      
 
       return 0;
 }

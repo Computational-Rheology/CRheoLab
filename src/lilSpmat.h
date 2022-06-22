@@ -37,13 +37,13 @@ public:
   // Returns the sparsity of the matrix
   double sparsity() const override;
 
-  //
+  // Returns the number of non-zero values in row i
   unsigned int getNbNZ(const unsigned int &i) const override;
 
-  //
+  // Returns the j-th non-zero value in row i (j is not the column)
   double getNZValue(const unsigned int &i, const unsigned int &j) const override;
 
-  //
+  // Returns the column of the j-th non-zero value in row i (j is not the column)
   unsigned int getNZColumn(const unsigned int &i, const unsigned int &j) const override;
 
   // Sets a value to position (i,j) if exists, otherwise inserts a new value
@@ -78,10 +78,10 @@ public:
 
 };
 
-//
+// Addition operator
 lilSpmat operator+(const lilSpmat& A,const lilSpmat& B);
 
-//
+// Subtraction operator
 lilSpmat operator-(const lilSpmat& A,const lilSpmat& B);
 
 #endif // LILSPMAT_H

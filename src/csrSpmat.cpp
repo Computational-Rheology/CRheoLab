@@ -83,28 +83,28 @@ csrSpmat::csrSpmat(Mesh& mesh)
   row_ptr_[numRows_] = nz;
 }
 
-//
+// Returns the sparsity of the matrix
+double csrSpmat::sparsity() const
+{
+  return (1.0 - ((double)numNZ_ / ((double)(numRows_ * numCols_))));
+}
+
+// Returns the number of non-zero values in row i
 unsigned int csrSpmat::getNbNZ(const unsigned int &i) const
 {
       return (row_ptr_[i+1]-row_ptr_[i]);
 }
 
-//
+// Returns the j-th non-zero value in row i (j is not the column)
 double csrSpmat::getNZValue(const unsigned int &i, const unsigned int &j) const
 {
       return values_[row_ptr_[i]+j];
 }
 
-//
+// Returns the column of the j-th non-zero value in row i (j is not the column)
 unsigned int csrSpmat::getNZColumn(const unsigned int &i, const unsigned int &j) const
 {
       return columns_[row_ptr_[i]+j];
-}
-
-// Returns the sparsity of the matrix
-double csrSpmat::sparsity() const
-{
-  return (1.0 - ((double)numNZ_ / ((double)(numRows_ * numCols_))));
 }
 
 // Sets a value to position (i,j) if exists, otherwise inserts a new value
@@ -255,7 +255,7 @@ double csrSpmat::xValueProduct(const unsigned int& i, const double& xValue) cons
   return sumProdRow;
 }
 
-//
+// Addition operator
 csrSpmat operator+(const csrSpmat& A,const csrSpmat& B)
 {
   csrSpmat C = A;
@@ -269,7 +269,7 @@ csrSpmat operator+(const csrSpmat& A,const csrSpmat& B)
   return C;
 }
 
-//
+// Subtraction operator
 csrSpmat operator-(const csrSpmat& A,const csrSpmat& B)
 {
   csrSpmat C = A;

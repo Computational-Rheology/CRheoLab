@@ -27,19 +27,19 @@ double lilSpmat::sparsity() const
   return (1.0 - ((double)nz / ((double)(numRows_ * numCols_))));
 }
 
-//
+// Returns the number of non-zero values in row i
 unsigned int lilSpmat::getNbNZ(const unsigned int &i) const
 {
       return columns_[i].size();
 }
 
-//
+// Returns the j-th non-zero value in row i (j is not the column)
 double lilSpmat::getNZValue(const unsigned int &i, const unsigned int &j) const
 {
       return values_[i][j];
 }
 
-//
+// Returns the column of the j-th non-zero value in row i (j is not the column)
 unsigned int lilSpmat::getNZColumn(const unsigned int &i, const unsigned int &j) const
 {
       return columns_[i][j];
@@ -192,7 +192,7 @@ double lilSpmat::xValueProduct(const unsigned int& i, const double& xValue) cons
   return sumProdRow;
 }
 
-//
+// Addition operator
 lilSpmat operator+(const lilSpmat& A,const lilSpmat& B)
 {
   lilSpmat C = A;
@@ -206,7 +206,7 @@ lilSpmat operator+(const lilSpmat& A,const lilSpmat& B)
   return C;
 }
 
-//
+// Subtraction operator
 lilSpmat operator-(const lilSpmat& A,const lilSpmat& B)
 {
   lilSpmat C = A;

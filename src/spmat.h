@@ -32,13 +32,13 @@ public:
     return numCols_;
   }
 
-  //
+  // Returns the number of non-zero values in row i
   virtual unsigned int getNbNZ(const unsigned int &i) const = 0;
 
-  //
+  // Returns the j-th non-zero value in row i (j is not the column)
   virtual double getNZValue(const unsigned int &i, const unsigned int &j) const = 0;
 
-  //
+  // Returns the column of the j-th non-zero value in row i (j is not the column)
   virtual unsigned int getNZColumn(const unsigned int &i, const unsigned int &j) const = 0;
 
   // Sets a value to position (i,j) if exists, otherwise inserts a new value
@@ -71,10 +71,10 @@ public:
   // Returns a double given by the sum of the products of xValue (a double) for the elements of the iRow matrix row
   virtual double xValueProduct(const unsigned int &i, const double &xValue) const = 0;
 
-  // //
+  // Addition operator
   // virtual spmat& operator+(const spmat& A,const spmat& B) = 0;
   //
-  // //
+  // Subtraction operator
   // virtual spmat& operator-(const spmat& A,const spmat& B) = 0;
 
 };
