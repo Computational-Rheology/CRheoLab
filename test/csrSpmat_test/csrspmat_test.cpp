@@ -27,18 +27,21 @@ int main(int argc, char const *argv[]) {
             std::cout << std::endl;
       }
 
-      //#############################################################
-
       std::cout << "#############################################################" << std::endl;
       std::cout << "Test sparse matrix construction" << std::endl;
       std::cout << "#############################################################" << std::endl;
 
-      RunTime time;
+      csrSpmat spmatA;
 
-      Mesh mesh(time);
-
-      // Declare and initialize a sparse matrix
-      csrSpmat spmatA = csrSpmat(mesh);
+      spmatA.numRows_ = 4;
+      spmatA.numCols_ = 4;
+      spmatA.numNZ_ = 6;
+      spmatA.columns_ = std::vector<unsigned int>(6);
+      spmatA.columns_ = {0,2,1,1,3,3};
+      spmatA.values_ = std::vector<double>(6);
+      spmatA.values_ = {1.0,2.0,3.0,4.0,5.0,6.0};
+      spmatA.row_ptr_ = std::vector<unsigned int>(4);
+      spmatA.row_ptr_ = {0,2,3,5};
 
       std::cout << "#############################################################" << std::endl;
       std::cout << "Test sparse matrix to dense format" << std::endl;
@@ -66,14 +69,14 @@ int main(int argc, char const *argv[]) {
       std::cout << "#############################################################" << std::endl;
 
       std::vector<double> vecPhi;
-      vecPhi.resize(mesh.nCells_);
+      vecPhi.resize(spmatA.getNumCols());
 
       std::cout << "Phi vector for multiplication:" << std::endl;
       for (double valuePhi : vecPhi)
             std::cout << valuePhi << std::endl;
 
       std::vector<double> v;
-      v.resize(mesh.nCells_);
+      v.resize(spmatA.getNumCols());
 
       // Call the function that calculates the product matrix-vector as a vector
       v = spmatA.matMul(vecPhi);
