@@ -36,7 +36,7 @@ int main(int argc, char const *argv[]) {
       spmatA.numRows_ = 4;
       spmatA.numCols_ = 4;
       spmatA.numNZ_ = 6;
-      spmatA.columns_ =  {0,2,1,1,3,3};
+      spmatA.columns_ = {0,2,1,1,3,3};
       spmatA.values_ = {1.0,2.0,3.0,4.0,5.0,6.0};
       spmatA.row_ptr_ = {0,2,3,5};
 
